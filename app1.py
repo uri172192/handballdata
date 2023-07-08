@@ -40,10 +40,19 @@ st.bar_chart(hist_values)
 #Plot data on a map
 st.subheader('Map of all pickups')
 st.map(data)
-#+Filter
-st.subheader('Map of all pickups')
-st.map(data)
+
+#Plot data on a map + Filter
 hour_to_filter = 17
 filtered_data = data[data[DATE_COLUMN].dt.hour == hour_to_filter]
 st.subheader(f'Map of all pickups at {hour_to_filter}:00')
 st.map(filtered_data)
+
+#Filter results slider
+hour_to_filter = st.slider('hour', 0, 23, 17)  # min: 0h, max: 23h, default: 17h
+
+#Boton to toggle data
+st.subheader('Raw data')
+st.write(data)
+if st.checkbox('Show raw data'):
+    st.subheader('Raw data')
+    st.write(data)
