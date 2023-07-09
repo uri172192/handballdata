@@ -5,4 +5,4 @@ features = st.beta_container()
 modelTraining = st.beta_container()
 
 with header:
-    st.Title("Welcome to my Data Science project")
+    st.title("Welcome to my Data Science project")
