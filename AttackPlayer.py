@@ -15,10 +15,6 @@ def handle_action(player_name, position, team_name, rival_team, phasegame, start
     df = df.append(new_row, ignore_index=True)
     return df
 
-# Variable global para almacenar el estado del DataFrame
-if 'df' not in st.session_state:
-    st.session_state.df = pd.DataFrame()
-
 col1, col2, col3, col4 = st.columns(4)
  
 with col1:
