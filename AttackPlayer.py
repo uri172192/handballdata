@@ -12,11 +12,11 @@ def handle_action(player_name, position, team_name, rival_team, phasegame, start
     if not isinstance(new_row, pd.DataFrame):
         new_row = pd.DataFrame(new_row, index=[0])
 
- # Agregar el nuevo registro directamente al DataFrame existente
+    # Agregar el nuevo registro directamente al DataFrame existente
     df = df.append(new_row, ignore_index=True)
-
-    # Modificar el DataFrame original en lugar de reasignarlo completamente
-    st.session_state.df = df.copy()
+    
+    # Modificar directamente el DataFrame almacenado en st.session_state
+    st.session_state.df = st.session_state.df.append(new_row, ignore_index=True)
     return df
 
 col1, col2, col3, col4 = st.columns(4)
