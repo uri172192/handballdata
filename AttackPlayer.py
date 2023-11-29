@@ -8,6 +8,10 @@ st.set_page_config(page_title="HPAA", layout="wide")
 def handle_action(player_name, position, team_name, rival_team, phasegame, start, action_type, sub_action_type, space, shoot_action_type, shoot_action_distance, howshoot, ast_action_typeast, result, df):
     new_row = {'Player Name': player_name, 'Position': position, 'Team Name': team_name, 'Rival Team Name': rival_team, 'Phase Game': phasegame, 'Inici': start,
                'Action Type': action_type, 'Sub Action Type': sub_action_type, 'Espai': space, 'Xut': shoot_action_type, 'Shoot Distance': shoot_action_distance, 'How Shoot': howshoot, 'Assist': ast_action_typeast, 'Result': result}
+    # Verificar el tipo de new_row antes de agregarlo al DataFrame
+    if not isinstance(new_row, pd.DataFrame):
+        new_row = pd.DataFrame(new_row, index=[0])
+
     df = df.append(new_row, ignore_index=True)
     return df
 
