@@ -66,7 +66,7 @@ with col4:
 
     # Botón para registrar la acción
     if st.button('**Registrar Acción**'):
-        st.session_state.df = handle_action(player_name, position, team_name, rival_team, phasegame, start, action_type, sub_action_type, space, shoot_action_type, shoot_action_distance, howshoot, ast_action_typeast, result, st.session_state.df)
+        st.session_state.df = handle_action(player_name, position, team_name, rival_team, phasegame, start, action_type, sub_action_type, space, shoot_action_type, shoot_action_distance, howshoot, ast_action_typeast, result, df)
         st.success('Acción registrada con éxito!')
 
     # Mostrar el DataFrame actualizado
