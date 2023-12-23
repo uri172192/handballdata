@@ -9,3 +9,5 @@ plotly
 PCA
 StandardScaler
 openpyxl
+gspread
+ServiceAccountCredentials
