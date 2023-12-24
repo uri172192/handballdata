@@ -10,4 +10,4 @@ PCA
 StandardScaler
 openpyxl
 gspread
-from oauth2client.service_account import ServiceAccountCredentials
+oauth2client.service_account
