@@ -10,6 +10,8 @@ def handle_action(team_name, rival_team, campo, phasegame, start, def_type, play
     df = df.append(new_row, ignore_index=True)
     return df
 
+# DataFrame para almacenar las acciones
+df = pd.DataFrame(columns=['Team Name', 'Rival Team Name', 'Lineup', 'Phase Game', 'Inici', 'Def Type', 'Player', 'Action Type', 'Feeder', 'Sub Action', 'Espai'])
 
 col1, col2, col3, col4 = st.columns(4)
  
@@ -51,15 +53,14 @@ with col4:
         ('0-1', '1-2', '2-3', '3-3', '3-2', '2-1', '1-0', '7m', '9mIzquierda', '9mCentro', '9mDerecha', 'Otros'))
     
 
-    # Botón para registrar la acción
     if st.button('**Registrar Acción**'):
+        df = handle_action(team_name, rival_team, campo, phasegame, start, def_type, player, action_type, player2, sub_action_type, space, df)
         st.success('Acción registrada con éxito!')
 
-    # Mostrar el DataFrame actualizado
     st.write('Acciones Registradas:')
+    st.write(df)
 
-
-    # Guardar el DataFrame en un archivo Excel al finalizar la sesión
     if st.button(':green[**Guardar en Excel**]'):
+        df.to_excel("acciones_balonmano.xlsx", index=False)
         st.success('Datos guardados en acciones_balonmano.xlsx')
-
+        st.markdown('[Descargar Excel](acciones_balonmano.xlsx)')
