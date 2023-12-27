@@ -57,5 +57,5 @@ with col4:
         st.success('Acción registrada con éxito!')
 
     if st.button(':green[**Guardar en Excel**]'):
-        dfinal.to_excel("acciones_balonmano.xlsx", index=False)
+        df.to_excel("acciones_balonmano.xlsx", index=False)
         st.success('Datos guardados en acciones_balonmano.xlsx')
