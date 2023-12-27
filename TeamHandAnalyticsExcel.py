@@ -11,7 +11,7 @@ def handle_action(team_name, rival_team, campo, phasegame, start, def_type, play
     return df
 
 # Variable global para almacenar el estado del DataFrame
-if 'df' not in dfinal:
+if 'df' not in st.dfinal:
     dfinal.df = pd.DataFrame()
 
 col1, col2, col3, col4 = st.columns(4)
