@@ -3,6 +3,10 @@ import pandas as pd
 
 st.set_page_config(page_title="HTA", layout="wide")
 
+# Inicializar la variable 'df' en el estado de la sesión
+if "df" not in st.session_state:
+    st.session_state.df = pd.DataFrame()
+
 # Function to handle the action
 def handle_action(team_name, rival_team, campo, phasegame, start, def_type, player, action_type, player2, sub_action_type, space, df):
     # Tu código para manejar la acción
