@@ -7,7 +7,7 @@ st.set_page_config(page_title="HTA", layout="wide")
 def handle_action(team_name, rival_team, campo, phasegame, start, def_type, player, action_type, player2, sub_action_type, space, df):
     new_row = {'Team Name': team_name, 'Rival Team Name': rival_team, 'Lineup': campo, 'Phase Game': phasegame, 'Inici': start,
                'Def Type': def_type, 'Player': player, 'Action Type': action_type, 'Feeder': player2,'Sub Action': sub_action_type, 'Espai': space}
-    df = pd.DataFrame(columns=['Team Name', 'Rival Team Name', 'Lineup', 'Phase Game', 'Inici', 'Def Type', 'Player', 'Action Type', 'Feeder', 'Sub Action', 'Espai'])
+    df = df.append(new_row, ignore_index=True)
     return df
 
 col1, col2, col3, col4 = st.columns(4)
@@ -53,9 +53,6 @@ with col4:
     if st.button('**Registrar Acción**'):
         df = pd.DataFrame(columns=['Team Name', 'Rival Team Name', 'Lineup', 'Phase Game', 'Inici', 'Def Type', 'Player', 'Action Type', 'Feeder', 'Sub Action', 'Espai'])
         st.success('Acción registrada con éxito!')
-
-    st.write('Acciones Registradas:')
-    st.write(df)
 
     if st.button(':green[**Guardar en Excel**]'):
         df.to_excel("acciones_balonmano.xlsx", index=False)
