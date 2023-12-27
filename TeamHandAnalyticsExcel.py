@@ -53,7 +53,8 @@ with col4:
     
 
     if st.button('**Registrar Acción**'):
-        st.write(df)
+        # Agregar las acciones registradas al DataFrame
+        handle_action(team_name, rival_team, campo, phasegame, start, def_type, player, action_type, player2, sub_action_type, space)
         st.success('Acción registrada con éxito!')
 
     if st.button(':green[**Guardar en Excel**]'):
