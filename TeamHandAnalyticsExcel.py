@@ -10,9 +10,6 @@ def handle_action(team_name, rival_team, campo, phasegame, start, def_type, play
     df = df.append(new_row, ignore_index=True)
     return df
 
-# Variable global para almacenar el estado del DataFrame
-if 'df' not in st.session_state:
-    st.session_state.df = pd.DataFrame()
 
 col1, col2, col3, col4 = st.columns(4)
  
@@ -56,15 +53,13 @@ with col4:
 
     # Botón para registrar la acción
     if st.button('**Registrar Acción**'):
-        st.session_state.df = handle_action(team_name, rival_team, campo, phasegame, start, def_type, player, action_type, player2, sub_action_type, space, st.session_state.df)
         st.success('Acción registrada con éxito!')
 
     # Mostrar el DataFrame actualizado
     st.write('Acciones Registradas:')
-    st.write(st.session_state.df)
+
 
     # Guardar el DataFrame en un archivo Excel al finalizar la sesión
     if st.button(':green[**Guardar en Excel**]'):
-        st.session_state.df.to_excel('acciones_balonmano.xlsx', index=False)
         st.success('Datos guardados en acciones_balonmano.xlsx')
 
