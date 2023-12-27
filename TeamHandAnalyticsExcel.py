@@ -23,7 +23,23 @@ with col1:
     rival_team = st.text_input('Rival')
     campo = st.text_input('Jugadores a Pista')
 
-# ... (resto del código)
+with col2:
+
+    #Fase Joc
+    phasegame = st.selectbox(':green[Fase Juego]', ['Ataque','Defensa'])
+
+    #Inici:
+    start = st.selectbox(':green[Situación Juego]', ['Posicional','Golpe', 'Contraataque','2na oleada', 'Contragol','Repliegue'])
+    # Desglosar tipos de acción y zonas en botones
+    def_type = st.selectbox('**Tipo Defensa**', ('6:0','5:1','3:3','3:2:1', '4:2','Individual'))
+
+with col3:
+
+    player = st.text_input('**Nº Jugador**')
+    action_type = st.selectbox (':red[**Acción**]', ('Gol','Falta','Parada', 'Palo/Fuera', 'Passos', 'Dobles', 'Ataque', 'Area', 'Mal pase', 'Mala recepción', '2 min', 'Penalti', 'Pasivo'))
+    player2 = st.text_input('**Nº Feeder**')
+    sub_action_type = st.selectbox (':red[**Sub Acción**]', ('NA','Fijación','Asistencia','Desmarque sin balón'))
+    
 
 with col4:
     # Botón para registrar la acción
