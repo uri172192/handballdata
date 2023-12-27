@@ -4,7 +4,7 @@ import pandas as pd
 st.set_page_config(page_title="HTA", layout="wide")
 
 # Función para manejar las acciones y actualizar el DataFrame
-def handle_action(team_name, rival_team, campo, phasegame, start, def_type, player, action_type, player2, sub_action_type, space, df):
+def handle_action(team_name, rival_team, campo, phasegame, start, def_type, player, action_type, player2, sub_action_type, space):
     new_row = {'Team Name': team_name, 'Rival Team Name': rival_team, 'Lineup': campo, 'Phase Game': phasegame, 'Inici': start,
                'Def Type': def_type, 'Player': player, 'Action Type': action_type, 'Feeder': player2,'Sub Action': sub_action_type, 'Espai': space}
     df = df.loc[len(df)] = new_row
