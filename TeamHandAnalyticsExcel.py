@@ -59,4 +59,3 @@ with col4:
     if st.button(':green[**Guardar en Excel**]'):
         dfinal.to_excel("acciones_balonmano.xlsx", index=False)
         st.success('Datos guardados en acciones_balonmano.xlsx')
-        st.markdown('[Descargar Excel](acciones_balonmano.xlsx)')
