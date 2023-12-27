@@ -10,8 +10,6 @@ def handle_action(team_name, rival_team, campo, phasegame, start, def_type, play
     df = df.loc[len(df)] = new_row
     return df
 
-dfinal = pd.DataFrame()
-
 col1, col2, col3, col4 = st.columns(4)
  
 with col1:
@@ -53,7 +51,7 @@ with col4:
     
 
     if st.button('**Registrar Acción**'):
-        dfinal = handle_action(team_name, rival_team, campo, phasegame, start, def_type, player, action_type, player2, sub_action_type, space)
+        df = handle_action(team_name, rival_team, campo, phasegame, start, def_type, player, action_type, player2, sub_action_type, space)
         st.success('Acción registrada con éxito!')
 
     if st.button(':green[**Guardar en Excel**]'):
