@@ -14,12 +14,6 @@ spreadsheet_url = "https://docs.google.com/spreadsheets/d/1Iwv9GfbNPm-UtI85kz1Qc
 sh = client.open_by_url(spreadsheet_url)
 worksheet = sh.get_worksheet(0)  # Elige la hoja de trabajo (worksheet) adecuada
 
-
-
-
-
-
-
 st.set_page_config(page_title="HTA", layout="wide")
 
 # Función para manejar las acciones y actualizar el DataFrame
@@ -51,9 +45,9 @@ with col2:
     phasegame = st.selectbox(':green[Fase Juego]', ['Ataque','Defensa'])
 
     #Inici:
-    start = st.selectbox(':green[Situación Juego]', ['Posicional','Golpe', 'Contraataque','2na oleada', 'Contragol','Repliegue'])
+    start = st.selectbox(':green[Situación Juego]', ['Posicional','Falta', 'Contraataque','2da oleada', 'Contragol','Repliegue', 'Inferioridad', 'Superioridad'])
     # Desglosar tipos de acción y zonas en botones
-    def_type = st.selectbox('**Tipo Defensa**', ('6:0','5:1','3:3','3:2:1', '4:2','Individual'))
+    def_type = st.selectbox('**Tipo Defensa**', ('6:0','5:1','3:3','3:2:1', '4:2','5:0','4:0','Individual'))
 
 
 with col3:
@@ -70,7 +64,7 @@ with col4:
      # Espais Atacats
     space = st.selectbox(
         ':orange[Selecciona Espacio Atacado/Defendido]',
-        ('0-1', '1-2', '2-3', '3-3', '3-2', '2-1', '1-0', '7m', '9mIzquierda', '9mCentro', '9mDerecha', 'Otros'))
+        ('6m 0-1', '6m 1-2', '6m 2-3', '6m 3-3', '6m 3-2', '6m 2-1', '6m 1-0', '7m', '9mIzquierda', '9mCentro', '9mDerecha', 'Otros'))
     
     # Botón para agregar información a Google Sheets
     if st.button('**Registrar Acción**'):
