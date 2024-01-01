@@ -16,6 +16,11 @@ worksheet = sh.get_worksheet(0)  # Elige la hoja de trabajo (worksheet) adecuada
 
 st.set_page_config(page_title="HTA", layout="wide")
 
+# Variable global para almacenar el estado del DataFrame
+if 'df' not in st.session_state:
+    st.session_state.df = pd.DataFrame(columns=['Team Name', 'Rival Team Name', 'Lineup', 'Phase Game', 'Inici',
+                                                'Def Type', 'Player', 'Action Type', 'Feeder', 'Sub Action', 'Espai'])
+
 # Función para manejar las acciones y actualizar el DataFrame
 def handle_action(team_name, rival_team, campo, phasegame, start, def_type, player, action_type, player2, sub_action_type, space, df):
     new_row = {'Team Name': team_name, 'Rival Team Name': rival_team, 'Lineup': campo, 'Phase Game': phasegame, 'Inici': start,
@@ -23,11 +28,6 @@ def handle_action(team_name, rival_team, campo, phasegame, start, def_type, play
 # Agrega una nueva fila al DataFrame utilizando el método loc
     df.loc[len(df)] = new_row
     return df
-
-# Variable global para almacenar el estado del DataFrame
-if 'df' not in st.session_state:
-    st.session_state.df = pd.DataFrame(columns=['Team Name', 'Rival Team Name', 'Lineup', 'Phase Game', 'Inici',
-                                                'Def Type', 'Player', 'Action Type', 'Feeder', 'Sub Action', 'Espai'])
 
 col1, col2, col3, col4 = st.columns(4)
  
