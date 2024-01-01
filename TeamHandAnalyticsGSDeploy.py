@@ -26,11 +26,14 @@ def handle_action(team_name, rival_team, campo, phasegame, start, def_type, play
     new_row = {'Team Name': team_name, 'Rival Team Name': rival_team, 'Lineup': campo, 'Phase Game': phasegame, 'Inici': start,
                'Def Type': def_type, 'Player': player, 'Action Type': action_type, 'Feeder': player2, 'Sub Action': sub_action_type, 'Espai': space}
     
-    # Agregar una nueva fila al DataFrame almacenado en la variable de estado
-    st.session_state.df = st.session_state.df.append(new_row, ignore_index=True)
+    # Obtener el DataFrame almacenado en la variable de estado
+    df_copy = st.session_state.df.copy()
     
-    # Obtener el DataFrame actualizado
-    df_copy = st.session_state.df
+    # Agregar una nueva fila al DataFrame
+    df_copy = pd.concat([df_copy, pd.DataFrame([new_row])], ignore_index=True)
+    
+    # Actualizar la variable de estado con el DataFrame actualizado
+    st.session_state.df = df_copy
     
     return df_copy
 
@@ -80,6 +83,6 @@ with col4:
         # Llamar a la función handle_action con los valores obtenidos
         action_data = handle_action(team_name_value, rival_team_value, campo_value, phasegame_value, start_value, def_type_value, player_value, action_type_value, player2_value, sub_action_type_value, space_value)
     
-        # Agregar nueva fila a la hoja de cálculo
-        worksheet.append_row(action_data.values.tolist()[0])
+        # Agrega nueva fila a la hoja de cálculo
+        worksheet.append_row(action_data.iloc[-1].values.tolist())
         st.success('Información agregada correctamente a Google Sheets')
