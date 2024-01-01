@@ -25,15 +25,16 @@ if 'df' not in st.session_state:
 def handle_action(team_name, rival_team, campo, phasegame, start, def_type, player, action_type, player2, sub_action_type, space, df):
     new_row = {'Team Name': team_name, 'Rival Team Name': rival_team, 'Lineup': campo, 'Phase Game': phasegame, 'Inici': start,
                'Def Type': def_type, 'Player': player, 'Action Type': action_type, 'Feeder': player2,'Sub Action': sub_action_type, 'Espai': space}
-    # Obtén la versión más actualizada del DataFrame
-    df = st.session_state.df
-
-    # Agrega una nueva fila al DataFrame utilizando el método loc
-    df.loc[len(df)] = new_row
+    # Crear una copia del DataFrame actualizado
+    df_copy = df.copy()
     
-    # Actualiza el DataFrame en la variable de estado
-    st.session_state.df = df
-    return df
+    # Agregar una nueva fila al DataFrame utilizando el método loc
+    df_copy.loc[len(df_copy)] = new_row
+    
+    # Actualizar la variable de estado con la copia del DataFrame
+    st.session_state.df = df_copy
+    
+    return df_copy
 
 col1, col2, col3, col4 = st.columns(4)
  
