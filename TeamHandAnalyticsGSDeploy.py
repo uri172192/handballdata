@@ -46,27 +46,28 @@ with col1:
     team_name = st.text_input('Equipo')
     rival_team = st.text_input('Rival')
     campo = st.text_input('Jugadores a Pista')
+    st.checkbox("Activate Mode Horitzontal", key="horizontal")
 
 with col2:
     #Fase Joc
-    phasegame = st.selectbox(':green[Fase Juego]', ['Ataque','Defensa'])
+    phasegame = st.radio(':green[**FASE JUEGO**]', ['Ataque','Defensa'], horizontal=st.session_state.horizontal)
     #Inici:
-    start = st.selectbox(':green[Situación Juego]', ['Posicional','Falta', 'Contraataque','2da oleada', 'Contragol','Repliegue', 'Inferioridad', 'Superioridad'])
+    start = st.radio(':green[**SITUACIÓN JUEGO**]', ['Posicional','Falta', 'Contraataque','2da oleada', 'Contragol','Repliegue', 'Inferioridad', 'Superioridad'], horizontal=st.session_state.horizontal)
     # Desglosar tipos de acción y zonas en botones
-    def_type = st.selectbox('**Tipo Defensa**', ('6:0','5:1','3:3','3:2:1', '4:2','5:0','4:0','Individual'))
+    def_type = st.radio('**TIPO DEFENSA**', ('6:0','5:1','3:3','3:2:1', '4:2','5:0','4:0','Individual'), horizontal=st.session_state.horizontal)
 
 with col3:
-    player = st.text_input('**Nº Jugador**')
-    action_type = st.selectbox(':red[**Acción**]', ('Gol','Falta','Parada', 'Palo/Fuera', 'Passos', 'Dobles', 'Ataque', 'Area', 'Recuperación','Mal pase', 'Mala recepción', '2 min', 'Penalti', 'Pasivo'))
-    player2 = st.text_input('**Nº Feeder**')
-    sub_action_type = st.selectbox(':red[**Sub Acción**]', ('NA','Fijación','Asistencia','Desmarque sin balón'))
+    player = st.text_input('**Nº JUGADOR**')
+    action_type = st.radio(':red[**ACCIÓN**]', ('Gol','Falta','Parada', 'Palo/Fuera', 'Passos', 'Dobles', 'Ataque', 'Area', 'Recuperación','Mal pase', 'Mala recepción', '2 min', 'Penalti', 'Pasivo'), horizontal=st.session_state.horizontal)
+    player2 = st.text_input('**Nº FEEDER**')
+    sub_action_type = st.radio(':red[**SUB ACCIÓN**]', ('NA','Fijación','Asistencia','Desmarque sin balón'), horizontal=st.session_state.horizontal)
     
 with col4:
     # Espais Atacats
-    space = st.selectbox(':orange[Selecciona Espacio Atacado/Defendido]',
-                         ('6m 0-1', '6m 1-2', '6m 2-3', '6m 3-3', '6m 3-2', '6m 2-1', '6m 1-0', '7m', '9mIzquierda', '9mCentro', '9mDerecha', 'Otros'))
+    space = st.radio(':orange[**SELECCIONA ESPACIO ATACADO/DEFENDIDO**]',
+                         ('6m 0-1', '6m 1-2', '6m 2-3', '6m 3-3', '6m 3-2', '6m 2-1', '6m 1-0', '7m', '9mIzquierda', '9mCentro', '9mDerecha', 'Otros'), horizontal=st.session_state.horizontal)
     # Botón para agregar información a Google Sheets
-    if st.button('**Registrar Acción**'):
+    if st.button('**REGISTRAR ACCIÓN**'):
         # Obtener los valores de los campos
         team_name_value = team_name
         rival_team_value = rival_team
