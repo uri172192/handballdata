@@ -22,57 +22,49 @@ if 'df' not in st.session_state:
                                                 'Def Type', 'Player', 'Action Type', 'Feeder', 'Sub Action', 'Espai'])
 
 # Función para manejar las acciones y actualizar el DataFrame
-def handle_action(team_name, rival_team, campo, phasegame, start, def_type, player, action_type, player2, sub_action_type, space, df):
+def handle_action(team_name, rival_team, campo, phasegame, start, def_type, player, action_type, player2, sub_action_type, space):
     new_row = {'Team Name': team_name, 'Rival Team Name': rival_team, 'Lineup': campo, 'Phase Game': phasegame, 'Inici': start,
-               'Def Type': def_type, 'Player': player, 'Action Type': action_type, 'Feeder': player2,'Sub Action': sub_action_type, 'Espai': space}
-         
-    # Agrega una nueva fila al DataFrame utilizando el método loc
-    df.loc[len(df)] = new_row
-
-    return df
+               'Def Type': def_type, 'Player': player, 'Action Type': action_type, 'Feeder': player2, 'Sub Action': sub_action_type, 'Espai': space}
+    
+    # Agregar una nueva fila al DataFrame almacenado en la variable de estado
+    st.session_state.df = st.session_state.df.append(new_row, ignore_index=True)
+    
+    # Obtener el DataFrame actualizado
+    df_copy = st.session_state.df
+    
+    return df_copy
 
 col1, col2, col3, col4 = st.columns(4)
  
 with col1:
-
     # Interfaz de usuario con Streamlit
-        st.markdown('**HANDBALL TEAM ANALYSIS**')
-
+    st.markdown('**HANDBALL TEAM ANALYSIS**')
     # Pedir información inicial
-        team_name = st.text_input('Equipo')
-        rival_team = st.text_input('Rival')
-        campo = st.text_input('Jugadores a Pista')
+    team_name = st.text_input('Equipo')
+    rival_team = st.text_input('Rival')
+    campo = st.text_input('Jugadores a Pista')
 
 with col2:
-
     #Fase Joc
     phasegame = st.selectbox(':green[Fase Juego]', ['Ataque','Defensa'])
-
     #Inici:
     start = st.selectbox(':green[Situación Juego]', ['Posicional','Falta', 'Contraataque','2da oleada', 'Contragol','Repliegue', 'Inferioridad', 'Superioridad'])
     # Desglosar tipos de acción y zonas en botones
     def_type = st.selectbox('**Tipo Defensa**', ('6:0','5:1','3:3','3:2:1', '4:2','5:0','4:0','Individual'))
 
-
 with col3:
-
     player = st.text_input('**Nº Jugador**')
-    action_type = st.selectbox (':red[**Acción**]', ('Gol','Falta','Parada', 'Palo/Fuera', 'Passos', 'Dobles', 'Ataque', 'Area', 'Recuperación','Mal pase', 'Mala recepción', '2 min', 'Penalti', 'Pasivo'))
+    action_type = st.selectbox(':red[**Acción**]', ('Gol','Falta','Parada', 'Palo/Fuera', 'Passos', 'Dobles', 'Ataque', 'Area', 'Recuperación','Mal pase', 'Mala recepción', '2 min', 'Penalti', 'Pasivo'))
     player2 = st.text_input('**Nº Feeder**')
-    sub_action_type = st.selectbox (':red[**Sub Acción**]', ('NA','Fijación','Asistencia','Desmarque sin balón'))
+    sub_action_type = st.selectbox(':red[**Sub Acción**]', ('NA','Fijación','Asistencia','Desmarque sin balón'))
     
 with col4:
-
-    # Selectbox para seleccionar la opción de asistencia
-
-     # Espais Atacats
-    space = st.selectbox(
-        ':orange[Selecciona Espacio Atacado/Defendido]',
-        ('6m 0-1', '6m 1-2', '6m 2-3', '6m 3-3', '6m 3-2', '6m 2-1', '6m 1-0', '7m', '9mIzquierda', '9mCentro', '9mDerecha', 'Otros'))
-    
+    # Espais Atacats
+    space = st.selectbox(':orange[Selecciona Espacio Atacado/Defendido]',
+                         ('6m 0-1', '6m 1-2', '6m 2-3', '6m 3-3', '6m 3-2', '6m 2-1', '6m 1-0', '7m', '9mIzquierda', '9mCentro', '9mDerecha', 'Otros'))
     # Botón para agregar información a Google Sheets
     if st.button('**Registrar Acción**'):
-    # Obtener los valores de los campos
+        # Obtener los valores de los campos
         team_name_value = team_name
         rival_team_value = rival_team
         campo_value = campo
@@ -86,9 +78,8 @@ with col4:
         space_value = space
     
         # Llamar a la función handle_action con los valores obtenidos
-        action_data = handle_action(team_name_value, rival_team_value, campo_value, phasegame_value, start_value, def_type_value, player_value, action_type_value, player2_value, sub_action_type_value, space_value, st.session_state.df)
+        action_data = handle_action(team_name_value, rival_team_value, campo_value, phasegame_value, start_value, def_type_value, player_value, action_type_value, player2_value, sub_action_type_value, space_value)
     
-        # Agrega nueva fila a la hoja de cálculo
+        # Agregar nueva fila a la hoja de cálculo
         worksheet.append_row(action_data.values.tolist()[0])
         st.success('Información agregada correctamente a Google Sheets')
-    
