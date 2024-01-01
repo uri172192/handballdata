@@ -3,3 +3,4 @@ pandas
 requests
 transformers
 pipeline
+gspread
