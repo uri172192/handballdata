@@ -20,7 +20,8 @@ st.set_page_config(page_title="HTA", layout="wide")
 def handle_action(team_name, rival_team, campo, phasegame, start, def_type, player, action_type, player2, sub_action_type, space, df):
     new_row = {'Team Name': team_name, 'Rival Team Name': rival_team, 'Lineup': campo, 'Phase Game': phasegame, 'Inici': start,
                'Def Type': def_type, 'Player': player, 'Action Type': action_type, 'Feeder': player2,'Sub Action': sub_action_type, 'Espai': space}
-    df = df.append(new_row, ignore_index=True)
+    new_index = len(df)
+    df.loc[new_index] = new_row
     return df
 
 # Variable global para almacenar el estado del DataFrame
