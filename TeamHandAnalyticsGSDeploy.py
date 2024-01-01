@@ -29,7 +29,7 @@ def handle_action(team_name, rival_team, campo, phasegame, start, def_type, play
     df_copy = df.copy()
     
     # Agregar una nueva fila al DataFrame utilizando el método loc
-    df_copy.loc[len(df_copy)] = new_row
+    df_copy = df_copy.append(new_row, ignore_index=True)
     
     # Actualizar la variable de estado con la copia del DataFrame
     st.session_state.df = df_copy
