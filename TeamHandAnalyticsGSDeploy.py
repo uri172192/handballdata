@@ -60,7 +60,7 @@ with col3:
     player = st.text_input('**Nº JUGADOR**')
     action_type = st.radio(':red[**ACCIÓN**]', ('Gol','Falta','Parada', 'Palo/Fuera', 'Passos', 'Dobles', 'Ataque', 'Area', 'Recuperación','Mal pase', 'Mala recepción', '2 min', 'Penalti', 'Pasivo'), horizontal=st.session_state.horizontal)
     player2 = st.text_input('**Nº FEEDER**')
-    sub_action_type = st.radio(':red[**SUB ACCIÓN**]', ('NA','Fijación','Asistencia','Desmarque sin balón'), horizontal=st.session_state.horizontal)
+    sub_action_type = st.radio(':red[**SUB ACCIÓN**]', ('NA','Asistencia','Desmarque sin balón'), horizontal=st.session_state.horizontal)
     
 with col4:
     # Espais Atacats
