@@ -188,6 +188,14 @@ with col3:
            '0-1': '6m 0-1',
            '7 metros': '7m',
            '1-0': '6m 1-0',
+           '1-2: '6m 1-2',
+           '2-3: '6m 2-3',
+           '3-3: '6m 3-3',
+           '3-2: '6m 3-2',
+           '2-1: '6m 2-1',
+           '9m Izq-: '9mIzquierda',
+           '9m Centro: '9mCentro',
+           '9m Derecha: '9mDerecha',
         # Agrega más mapeos según sea necesario
          }
 
