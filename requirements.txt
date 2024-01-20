@@ -5,3 +5,4 @@ transformers
 pipeline
 gspread
 oauth2client
+streamlit_antd_components
