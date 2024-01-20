@@ -169,7 +169,7 @@ with col3:
                                sac.SegmentedItem(label='............',disabled=True),
                                sac.SegmentedItem(label='Propio Campo')
                                ],
-                               label='**Espacio Atacado/Defendido**', size='md', direction='horizontal')
+                               label='**Espacio Atacado/Defendido**', size='sm', direction='horizontal')
     
     # Botón para agregar información a Google Sheets
     if st.button('**REGISTRAR ACCIÓN**'):
