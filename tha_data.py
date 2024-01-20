@@ -64,10 +64,10 @@ def handle_action(team_name, rival_team, campo, phasegame, start, def_type, play
     return df_copy
 
 # Interfaz de usuario con Streamlit
-    st.markdown('**HANDBALL TEAM ANALYSIS**')
-    # Pedir información inicial
-    team_name = st.text_input('Equipo')
-    rival_team = st.text_input('Rival')
+st.markdown('**HANDBALL TEAM ANALYSIS**')
+# Pedir información inicial
+team_name = st.text_input('Equipo')
+rival_team = st.text_input('Rival')
 
 col1, col2, col3, col4 = st.columns(4)
  
