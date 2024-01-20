@@ -25,7 +25,7 @@ if st.session_state.page == "home":
     st.write("Configura los números de los jugadores:")
 
 # En lugar de st.text_input, usa st.text_area para ingresar múltiples números separados por comas
-player_numbers = st.text_area("Introduce los números de los jugadores separados por comas", value="1,2,3")
+player_numbers = st.text_input("Introduce los números de los jugadores separados por comas", value="1,2,3")
 
 if st.button("Crear botones de jugadores"):
     st.session_state.player_numbers_list = [int(x.strip()) for x in player_numbers.split(",") if x.strip().isnumeric()]
