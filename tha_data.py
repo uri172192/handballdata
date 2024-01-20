@@ -104,7 +104,7 @@ with col1:
                                label='**Tipo Defensa**', align='left', size='sm')
 with col2:
     if "page" not in st.session_state or st.session_state.page != "player_buttons":
-        col3.write('')  # Clear the previous input
+        col2.write('')  # Clear the previous input
     else:
         #Utiliza sac.chip para generar botones con cada número de jugador
         campo = sac.chip([
