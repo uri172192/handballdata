@@ -149,7 +149,7 @@ with col2:
 with col3:
     # Espais Atacats
     space = sac.segmented(items=
-                              [ac.SegmentedItem(label='...',disabled=True),
+                              [sac.SegmentedItem(label='...',disabled=True),
                                sac.SegmentedItem(label='0-1'),
                                sac.SegmentedItem(label='7 metros'),
                                sac.SegmentedItem(label='1-0'),
