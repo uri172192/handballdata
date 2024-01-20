@@ -182,9 +182,21 @@ with col3:
         player2_value = player2
         sub_action_type_value = sub_action_type
         space_value = space
-    
+
+        # Diccionario de mapeo para los valores de Espacio Atacado/Defendido
+        espacio_mapping = {
+           '0-1': '6m 0-1',
+           '7 metros': '7m',
+           '1-0': '6m 1-0',
+        # Agrega más mapeos según sea necesario
+         }
+
+        # Obtener el valor mapeado para el espacio seleccionado en la aplicación
+        space_value_mapped = espacio_mapping.get(space_value, space_value)
+
+
         # Llamar a la función handle_action con los valores obtenidos
-        action_data = handle_action(team_name_value, rival_team_value, campo_value, phasegame_value, start_value, def_type_value, player_value, action_type_value, player2_value, sub_action_type_value, space_value)
+        action_data = handle_action(team_name_value, rival_team_value, campo_value, phasegame_value, start_value, def_type_value, player_value, action_type_value, player2_value, sub_action_type_value, space_value, space_value_mapped)
     
         # Agrega nueva fila a la hoja de cálculo
         worksheet.append_row(action_data.iloc[-1].values.tolist())
