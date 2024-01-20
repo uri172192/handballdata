@@ -24,12 +24,23 @@ if "page" not in st.session_state:
 if st.session_state.page == "home":
     st.write("Configura los números de los jugadores:")
 
-# En lugar de st.text_input, usa st.text_area para ingresar múltiples números separados por comas
-player_numbers = st.text_input("Introduce los números de los jugadores separados por comas", value="1,2,3")
+# Inicializa la variable de estado show_player_input si no existe
+if 'show_player_input' not in st.session_state:
+    st.session_state.show_player_input = True
 
-if st.button("Crear botones de jugadores"):
+# Antes de la creación del botón "Crear botones de jugadores"
+if 'show_create_button' not in st.session_state:
+    st.session_state.show_create_button = True
+
+# En lugar de st.text_input, usa st.text_area para ingresar múltiples números separados por comas
+if st.session_state.show_player_input:
+    player_numbers = st.text_input("Introduce los números de los jugadores separados por comas", value="1,2,3")
+
+if st.session_state.show_create_button and st.button("Crear botones de jugadores"):
     st.session_state.player_numbers_list = [int(x.strip()) for x in player_numbers.split(",") if x.strip().isnumeric()]
     st.session_state.page = "player_buttons"
+    st.session_state.show_player_input = False  # Oculta la sección de entrada de números de jugadores
+    st.session_state.show_create_button = False  # Oculta el botón "Crear botones de jugadores"
     
 # Variable global para almacenar el estado del DataFrame
 if 'df' not in st.session_state:
