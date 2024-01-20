@@ -63,6 +63,7 @@ def handle_action(team_name, rival_team, campo, phasegame, start, def_type, play
     
     return df_copy
 
+#Info general:
 col1, col2, col3 = st.columns(3)
 with col1:
          #Interfaz de usuario con Streamlit
@@ -72,14 +73,13 @@ with col2:
 with col3:
          rival_team = st.text_input('Rival')
 
-col1, col2, col3, col4 = st.columns(4)
+#App Data
+col1, col2, col3 = st.columns(4)
  
 with col1:
     #Fase Joc
     phasegame = sac.segmented(items=[sac.SegmentedItem(label='Ataque'),sac.SegmentedItem(label='Defensa')],label='**Fase Juego**', align='left', size='sm')
 
-
-with col2:
     #Inici:
     start = sac.segmented(items=
                               [sac.SegmentedItem(label='Contraataque'),
@@ -102,7 +102,7 @@ with col2:
                                sac.SegmentedItem(label='4:0'),
                                sac.SegmentedItem(label='Indiviual')],
                                label='**Tipo Defensa**', align='left', size='sm')
-with col3:
+with col2:
     if "page" not in st.session_state or st.session_state.page != "player_buttons":
         col3.write('')  # Clear the previous input
     else:
@@ -146,7 +146,7 @@ with col3:
                                sac.SegmentedItem(label='Desmarque sin balón')],
                                label='**Sub Acción**', align='left', size='sm')
     
-with col4:
+with col3:
     # Espais Atacats
     space = sac.segmented(items=
                               [sac.SegmentedItem(label='.......',disabled=True),
