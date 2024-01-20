@@ -57,7 +57,6 @@ col1, col2, col3, col4 = st.columns(4)
 with col1:
     # Interfaz de usuario con Streamlit
     st.markdown('**HANDBALL TEAM ANALYSIS**')
-    st.checkbox("Activate Mode Horizontal", key="horizontal")
     # Pedir información inicial
     team_name = st.text_input('Equipo')
     rival_team = st.text_input('Rival')
