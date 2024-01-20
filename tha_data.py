@@ -158,7 +158,6 @@ with col3:
                                sac.SegmentedItem(label='3-3'),
                                sac.SegmentedItem(label='3-2'),
                                sac.SegmentedItem(label='2-1'),
-                               sac.SegmentedItem(label='..',disabled=True),
                                sac.SegmentedItem(label='9m Izq'),
                                sac.SegmentedItem(label='9m Centro'),
                                sac.SegmentedItem(label='9m Der'),
