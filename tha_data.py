@@ -74,7 +74,7 @@ with col3:
          rival_team = st.text_input('Rival')
 
 #App Data
-col1, col2, col3 = st.columns(4)
+col1, col2, col3 = st.columns(3)
  
 with col1:
     #Fase Joc
