@@ -90,7 +90,7 @@ with col1:
                                sac.SegmentedItem(label='Superioridad'),
                                sac.SegmentedItem(label='Inferioridad'),
                                sac.SegmentedItem(label='Posicional')],
-                               label='**Situación Juego**', align='left', size='sm')
+                               label='**Situación Juego**', align='left', size='sm', divider=False)
     # Desglosar tipos de acción y zonas en botones
     def_type = sac.segmented(items=
                               [sac.SegmentedItem(label='6:0'),
@@ -101,7 +101,7 @@ with col1:
                                sac.SegmentedItem(label='5:0'),
                                sac.SegmentedItem(label='4:0'),
                                sac.SegmentedItem(label='Indiviual')],
-                               label='**Tipo Defensa**', align='left', size='sm')
+                               label='**Tipo Defensa**', align='left', size='sm', divider=False)
 with col2:
     if "page" not in st.session_state or st.session_state.page != "player_buttons":
         col2.write('')  # Clear the previous input
@@ -114,7 +114,7 @@ with col2:
         # Utiliza sac.buttons para generar botones con cada número de jugador seleccionado
         selected_player_numbers = [x for x in st.session_state.player_numbers_list if str(x) in campo]
         player_numbers_buttons = sac.buttons([sac.ButtonsItem(label=str(player_num)) for player_num in selected_player_numbers],
-                                             label='**Pista**', align='left', radius='xs')
+                                             label='**Pista**', align='left', radius='xs', divider=False)
         # Obtiene el número seleccionado del botón
         player = player_numbers_buttons
 
@@ -133,18 +133,18 @@ with col2:
                                sac.SegmentedItem(label='2 min'),
                                sac.SegmentedItem(label='Penalti'),
                                sac.SegmentedItem(label='Pasivo')],
-                               label='**Acción**', align='left', size='sm')
+                               label='**Acción**', align='left', size='sm', divider=False)
     
         selected_player_numbers = [x for x in st.session_state.player_numbers_list if str(x) in campo]
         player_numbers_buttons2 = sac.buttons([sac.ButtonsItem(label=str(player_num)) for player_num in selected_player_numbers],
-                                             label='**Feeder**', align='left', radius='xs')
+                                             label='**Feeder**', align='left', radius='xs', divider=False)
         player2 = player_numbers_buttons2
 
         sub_action_type = sac.segmented(items=
                               [sac.SegmentedItem(label='NA'),
                                sac.SegmentedItem(label='Asistencia'),
                                sac.SegmentedItem(label='Desmarque sin balón')],
-                               label='**Sub Acción**', align='left', size='sm')
+                               label='**Sub Acción**', align='left', size='sm', divider=False)
     
 with col3:
     # Espais Atacats
@@ -152,7 +152,7 @@ with col3:
                               [sac.SegmentedItem(label='0-1'),
                                sac.SegmentedItem(label='7 metros'),
                                sac.SegmentedItem(label='1-0'),
-                               sac.SegmentedItem(label='.......',disabled=True),
+                               sac.SegmentedItem(label='......',disabled=True),
                                sac.SegmentedItem(label='1-2'),
                                sac.SegmentedItem(label='2-3'),
                                sac.SegmentedItem(label='3-3'),
