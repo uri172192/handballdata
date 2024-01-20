@@ -16,7 +16,7 @@ spreadsheet_url = "https://docs.google.com/spreadsheets/d/1Iwv9GfbNPm-UtI85kz1Qc
 sh = client.open_by_url(spreadsheet_url)
 worksheet = sh.get_worksheet(0)  # Elige la hoja de trabajo (worksheet) adecuada
 
-st.set_page_config(page_title="HTA")
+st.set_page_config(page_title="HTA", layout="wide")
 
 if "page" not in st.session_state:
     st.session_state.page = "home"
