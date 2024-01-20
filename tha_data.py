@@ -153,7 +153,6 @@ with col3:
                                sac.SegmentedItem(label='7 metros'),
                                sac.SegmentedItem(label='1-0'),
                                sac.SegmentedItem(label='.......',disabled=True),
-                               sac.SegmentedItem(label='..',disabled=True),
                                sac.SegmentedItem(label='1-2'),
                                sac.SegmentedItem(label='2-3'),
                                sac.SegmentedItem(label='3-3'),
