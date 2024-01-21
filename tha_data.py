@@ -83,14 +83,14 @@ with col1:
 
     #Inici:
     start = sac.segmented(items=
-                              [sac.SegmentedItem(label='Contraataque'),
-                               sac.SegmentedItem(label='2da oleada'),
+                              [sac.SegmentedItem(label='Posicional'),
                                sac.SegmentedItem(label='Falta'),
+                               sac.SegmentedItem(label='2da Oleada'),
                                sac.SegmentedItem(label='Repliegue'),
                                sac.SegmentedItem(label='Contragol'),
+                               sac.SegmentedItem(label='Contraataque'),
                                sac.SegmentedItem(label='Superioridad'),
-                               sac.SegmentedItem(label='Inferioridad'),
-                               sac.SegmentedItem(label='Posicional')],
+                               sac.SegmentedItem(label='Inferioridad')],
                                label='**Situación Juego**', align='left', size='sm', divider=False)
     # Desglosar tipos de acción y zonas en botones
     def_type = sac.segmented(items=
