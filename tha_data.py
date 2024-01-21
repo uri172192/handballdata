@@ -169,10 +169,8 @@ with col3:
                                sac.SegmentedItem(label='9m Izq'),
                                sac.SegmentedItem(label='9m Centro'),
                                sac.SegmentedItem(label='9m Der'),
-                               sac.SegmentedItem(label='............',disabled=True),
-                               sac.SegmentedItem(label='Medio Campo'),
-                               sac.SegmentedItem(label='............',disabled=True),
-                               sac.SegmentedItem(label='Propio Campo')
+                               sac.SegmentedItem(label='-   Medio Campo   -'),
+                               sac.SegmentedItem(label='-   Propio Campo   -')
                                ],
                                label='**Espacio Atacado/Defendido**', size='md', divider=False)
     
