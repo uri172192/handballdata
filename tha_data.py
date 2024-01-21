@@ -136,11 +136,15 @@ with col2:
                                sac.SegmentedItem(label='Pasivo')],
                                label='**Acción**', align='left', size='sm', divider=False)
 
-        
+        if 'player_buttons_switch' not in st.session_state:
+            st.session_state.player_buttons_switch = True
+
         selected_player_numbers = [x for x in st.session_state.player_numbers_list if str(x) in campo]
         player_numbers_buttons2 = sac.buttons([sac.ButtonsItem(label=str(player_num)) for player_num in selected_player_numbers],
                                              label='**Feeder**', align='left', radius='xs')
-        sac.switch(label='player2', align='center', size='sm')
+        # Agrega un sac.switch para activar o desactivar player_numbers_buttons2
+        st.session_state.player_buttons_switch = sac.switch(label="Activar/Desactivar Feeder", value=True)
+
         player2 = player_numbers_buttons2
 
         sub_action_type = sac.segmented(items=
