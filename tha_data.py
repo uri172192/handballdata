@@ -137,7 +137,7 @@ with col2:
                                label='**Acción**', align='left', size='sm', divider=False)
     
         selected_player_numbers = [x for x in st.session_state.player_numbers_list if str(x) in campo]
-        player_numbers_buttons2 = sac.Chip([sac.ChipItem(label=str(player_num)) for player_num in selected_player_numbers],
+        player_numbers_buttons2 = sac.chip([sac.ChipItem(label=str(player_num)) for player_num in selected_player_numbers],
                                              label='**Feeder**', align='left', radius='xs')
         player2 = player_numbers_buttons2
 
