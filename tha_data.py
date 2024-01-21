@@ -202,8 +202,8 @@ with col3:
            '9m Izq': '9mIzquierda',
            '9m Centro': '9mCentro',
            '9m Derecha': '9mDerecha',
-           '-   Medio Campo   -:'MedioCampo',
-           '-   Propio Campo   -: 'PropioCampo'
+           '-   Medio Campo   -':'Medio Campo',
+           '-   Propio Campo   -': 'Propio Campo'
          }
 
         # Obtener el valor mapeado para el espacio seleccionado en la aplicación
