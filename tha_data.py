@@ -4,6 +4,7 @@ import pandas as pd
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 import streamlit_antd_components as sac
+import time
 
 # Configura las credenciales para acceder a la API de Google Sheets
 scope = ['https://spreadsheets.google.com/feeds',
@@ -202,6 +203,15 @@ with col3:
         # Obtener el valor mapeado para el espacio seleccionado en la aplicación
         space_value_mapped = espacio_mapping.get(space_value, space_value)
 
+        # Clear the selections
+        selected_player_numbers.clear()
+        time.sleep(0.1)  # Add a short delay to ensure the buttons are updated before accessing them
+
+        # Update the player_numbers_buttons and player_numbers_buttons2
+        player_numbers_buttons = sac.buttons([sac.ButtonsItem(label=str(player_num)) for player_num in selected_player_numbers],
+                                             label='**Pista**', align='left', radius='xs')
+        player_numbers_buttons2 = sac.buttons([sac.ButtonsItem(label=str(player_num)) for player_num in selected_player_numbers],
+                                             label='**Feeder**', align='left', radius='xs')
 
         # Llamar a la función handle_action con los valores obtenidos
         action_data = handle_action(team_name_value, rival_team_value, campo_value, phasegame_value, start_value, def_type_value, player_value, action_type_value, player2_value, sub_action_type_value, space_value_mapped)
