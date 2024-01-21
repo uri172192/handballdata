@@ -34,7 +34,7 @@ if 'show_create_button' not in st.session_state:
 
 # En lugar de st.text_input, usa st.text_area para ingresar múltiples números separados por comas
 if st.session_state.show_player_input:
-    player_numbers = st.text_input("Introduce los números de los jugadores separados por comas", value="0,1,2,3")
+    player_numbers = st.text_input("Introduce los números de los jugadores separados por comas", value="1,2,3")
 
 if st.session_state.show_create_button and st.button("Crear botones de jugadores"):
     st.session_state.player_numbers_list = [int(x.strip()) for x in player_numbers.split(",") if x.strip().isnumeric()]
@@ -196,8 +196,7 @@ with col3:
            '2-1': '6m 2-1',
            '9m Izq': '9mIzquierda',
            '9m Centro': '9mCentro',
-           '9m Derecha': '9mDerecha',
-        # Agrega más mapeos según sea necesario
+           '9m Derecha': '9mDerecha'
          }
 
         # Obtener el valor mapeado para el espacio seleccionado en la aplicación
@@ -209,4 +208,8 @@ with col3:
     
         # Agrega nueva fila a la hoja de cálculo
         worksheet.append_row(action_data.iloc[-1].values.tolist())
+        # Desseleccionar automáticamente los elementos en Pista y Feeder
+        st.session_state.player = ''
+        st.session_state.player2 = ''
+
         st.success('Información agregada correctamente a Google Sheets')
