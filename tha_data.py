@@ -138,7 +138,7 @@ with col2:
     
         selected_player_numbers = [x for x in st.session_state.player_numbers_list if str(x) in campo]
         player_numbers_buttons2 = sac.chip([sac.ChipItem(label=str(player_num)) for player_num in selected_player_numbers],
-                                             label='**Feeder**', align='left', radius='xs', multiple=True)
+                                             label='**Feeder**', align='left', radius='xs')
 
         sub_action_type = sac.segmented(items=
                               [sac.SegmentedItem(label='NA'),
