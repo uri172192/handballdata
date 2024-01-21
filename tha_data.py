@@ -218,8 +218,4 @@ with col3:
     
         # Agrega nueva fila a la hoja de cálculo
         worksheet.append_row(action_data.iloc[-1].values.tolist())
-        # Desseleccionar automáticamente los elementos en Pista y Feeder
-        st.session_state.player = '' if st.session_state.player else ' '
-        st.session_state.player2 = '' if st.session_state.player else ' '
-
         st.success('Información agregada correctamente a Google Sheets')
