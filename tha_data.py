@@ -36,7 +36,7 @@ if 'show_create_button' not in st.session_state:
          
 # Crea llista num jugadors, en lugar de st.text_input, usa st.text_area para ingresar múltiples números separados por comas
 if st.session_state.show_player_input:
-    player_numbers = st.text_area("Introduce los números de los jugadores separados por comas", value='1,2,3')
+    player_numbers = st.text_area("Introduce los números de los jugadores separados por comas:", value='1,2,3')
 
 # Crear botons
 if st.session_state.show_create_button and st.button("Crear botones de jugadores"):
