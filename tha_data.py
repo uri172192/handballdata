@@ -74,6 +74,14 @@ with col2:
 with col3:
          rival_team = st.text_input('Rival')
 
+if "page" not in st.session_state or st.session_state.page != "player_buttons":
+        col2.write('')  # Clear the previous input
+    else:
+        #Utiliza sac.chip para generar botones con cada número de jugador
+        campo = sac.chip([
+            sac.ChipItem(label=str(player_num)) for player_num in st.session_state.player_numbers_list
+        ], label='**Banquillo**', align='left', radius='xs', key="player_buttons", multiple=True)
+
 #App Data
 col1, col2, col3 = st.columns(3)
  
@@ -104,14 +112,7 @@ with col1:
                                sac.SegmentedItem(label='Indiviual')],
                                label='**Tipo Defensa**', align='left', size='sm', divider=False)
 with col2:
-    if "page" not in st.session_state or st.session_state.page != "player_buttons":
-        col2.write('')  # Clear the previous input
-    else:
-        #Utiliza sac.chip para generar botones con cada número de jugador
-        campo = sac.chip([
-            sac.ChipItem(label=str(player_num)) for player_num in st.session_state.player_numbers_list
-        ], label='**Banquillo**', align='left', radius='xs', key="player_buttons", multiple=True)
-
+    
         # Utiliza sac.buttons para generar botones con cada número de jugador seleccionado
         selected_player_numbers = [x for x in st.session_state.player_numbers_list if str(x) in campo]
         player_numbers_buttons = sac.buttons([sac.ButtonsItem(label=str(player_num)) for player_num in selected_player_numbers],
