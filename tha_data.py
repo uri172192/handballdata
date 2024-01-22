@@ -112,14 +112,14 @@ with col2:
                      sac.ChipItem(label=str(player_num)) for player_num in st.session_state.player_numbers_list
                  ], label='**Banquillo**', align='left', radius='xs', key="player_buttons", multiple=True)
              
-        # Utiliza sac.buttons para generar botones con cada número de jugador seleccionado
-        selected_player_numbers = [x for x in st.session_state.player_numbers_list if str(x) in campo]
-        player_numbers_buttons = sac.buttons([sac.ButtonsItem(label=str(player_num)) for player_num in selected_player_numbers],
+                 # Utiliza sac.buttons para generar botones con cada número de jugador seleccionado
+                 selected_player_numbers = [x for x in st.session_state.player_numbers_list if str(x) in campo]
+                 player_numbers_buttons = sac.buttons([sac.ButtonsItem(label=str(player_num)) for player_num in selected_player_numbers],
                                              label='**Pista**', align='left', radius='xs')
-        # Obtiene el número seleccionado del botón
-        player = player_numbers_buttons
+                 # Obtiene el número seleccionado del botón
+                 player = player_numbers_buttons
 
-        action_type = sac.segmented(items=
+                 action_type = sac.segmented(items=
                               [sac.SegmentedItem(label='Gol'),
                                sac.SegmentedItem(label='Falta'),
                                sac.SegmentedItem(label='Parada'),
@@ -136,18 +136,18 @@ with col2:
                                sac.SegmentedItem(label='Pasivo')],
                                label='**Acción**', align='left', size='sm', divider=False)
 
-        st.session_state.player_buttons_switch = sac.switch(label="Activar/Desactivar Feeder", value=True)
+                 st.session_state.player_buttons_switch = sac.switch(label="Activar/Desactivar Feeder", value=True)
         
-        # Utiliza la variable de estado del interruptor para activar o desactivar player_numbers_buttons2
-        if st.session_state.player_buttons_switch:
-            player_numbers_buttons2 = sac.buttons([sac.ButtonsItem(label=str(player_num)) for player_num in selected_player_numbers],
-                                                 label='**Feeder**', align='left', radius='xs')
-        else:
-            player_numbers_buttons2 = None
+                 # Utiliza la variable de estado del interruptor para activar o desactivar player_numbers_buttons2
+                 if st.session_state.player_buttons_switch:
+                     player_numbers_buttons2 = sac.buttons([sac.ButtonsItem(label=str(player_num)) for player_num in selected_player_numbers],
+                                                          label='**Feeder**', align='left', radius='xs')
+                 else:
+                     player_numbers_buttons2 = None
 
-        player2 = player_numbers_buttons2
+                 player2 = player_numbers_buttons2
 
-        sub_action_type = sac.segmented(items=
+                 sub_action_type = sac.segmented(items=
                               [sac.SegmentedItem(label='NA'),
                                sac.SegmentedItem(label='Asistencia'),
                                sac.SegmentedItem(label='Desmarque sin balón')],
