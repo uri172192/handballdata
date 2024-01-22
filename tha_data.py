@@ -101,8 +101,8 @@ with col1:
                                sac.SegmentedItem(label='4:2'),
                                sac.SegmentedItem(label='5:0'),
                                sac.SegmentedItem(label='4:0'),
-                               sac.SegmentedItem(label='Indiviual')],
-                               label='**Tipo Defensa**', align='left', size='sm', divider=False, direction='vertical')
+                               sac.SegmentedItem(label='Individual')],
+                               label='**Tipo Defensa**', align='left', size='sm', divider=False)
 with col2:
          if "page" not in st.session_state or st.session_state.page != "player_buttons":
                  col2.write('')  # Clear the previous input
