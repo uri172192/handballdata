@@ -114,7 +114,7 @@ with col2:
                  # Utiliza sac.buttons para generar botones con cada número de jugador seleccionado
                  selected_player_numbers = [x for x in st.session_state.player_numbers_list if str(x) in campo]
                  player_numbers_buttons = sac.buttons([sac.ButtonsItem(label=str(player_num)) for player_num in selected_player_numbers],
-                                             label='**Pista**', align='left', radius='xs')
+                                             label='**Pista**', align='left', size='xs', radius='xs')
                  # Obtiene el número seleccionado del botón
                  player = player_numbers_buttons
 
@@ -140,7 +140,7 @@ with col2:
                  # Utiliza la variable de estado del interruptor para activar o desactivar player_numbers_buttons2
                  if st.session_state.player_buttons_switch:
                      player_numbers_buttons2 = sac.buttons([sac.ButtonsItem(label=str(player_num)) for player_num in selected_player_numbers],
-                                                          label='**Feeder**', align='left', radius='xs')
+                                                          label='**Feeder**', align='left', size='xs', radius='xs')
                  else:
                      player_numbers_buttons2 = None
 
