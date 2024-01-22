@@ -23,6 +23,7 @@ if "page" not in st.session_state:
     st.session_state.page = "home"
 
 if st.session_state.page == "home":
+    st.title('**HANDBALL TEAM ANALYSIS**')
     st.write("Configura los números de los jugadores:")
 
 # Inicializa la variable de estado show_player_input si no existe
@@ -33,17 +34,9 @@ if 'show_player_input' not in st.session_state:
 if 'show_create_button' not in st.session_state:
     st.session_state.show_create_button = True
          
-# Antes insertar el Título
-if 'show_title' not in st.session_state:
-    st.session_state.show_title = True
-
 # Crea llista num jugadors, en lugar de st.text_input, usa st.text_area para ingresar múltiples números separados por comas
 if st.session_state.show_player_input:
     player_numbers = st.text_area("Introduce los números de los jugadores separados por comas", value='1,2,3')
-
-# Crear Título
-if st.session_state.show_title:
-    st.title('**HANDBALL TEAM ANALYSIS**')
 
 # Crear botons
 if st.session_state.show_create_button and st.button("Crear botones de jugadores"):
@@ -51,7 +44,6 @@ if st.session_state.show_create_button and st.button("Crear botones de jugadores
     st.session_state.page = "player_buttons"
     st.session_state.show_player_input = False  # Oculta la sección de entrada de números de jugadores
     st.session_state.show_create_button = False  # Oculta el botón "Crear botones de jugadores"
-    st.session_state.show_title = False # Oculta título
     
 # Variable global para almacenar el estado del DataFrame
 if 'df' not in st.session_state:
