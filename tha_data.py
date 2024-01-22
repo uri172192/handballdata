@@ -13,7 +13,7 @@ creds = ServiceAccountCredentials.from_json_keyfile_name('my-project-uri-409012-
 client = gspread.authorize(creds)
 
 # Abre la hoja de cálculo usando el enlace público
-spreadsheet_url = "https://docs.google.com/spreadsheets/d/1Iwv9GfbNPm-UtI85kz1Qc3Ng2wVS9BfnfU0qJwfmPiQ/edit?usp=sharing"
+spreadsheet_url = "https://docs.google.com/spreadsheets/d/1LKgT9JOEjH96Zlv8B7rXOdRwDjvCZ_3zbYUp9VbDypI/edit?usp=sharing"
 sh = client.open_by_url(spreadsheet_url)
 worksheet = sh.get_worksheet(0)  # Elige la hoja de trabajo (worksheet) adecuada
 
