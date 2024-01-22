@@ -109,7 +109,7 @@ with col2:
                  #Utiliza sac.chip para generar botones con cada número de jugador
                  campo = sac.chip([
                      sac.ChipItem(label=str(player_num)) for player_num in st.session_state.player_numbers_list
-                 ], label='**Banquillo**', align='left', radius='xs', key="player_buttons", multiple=True)
+                 ], label='**Banquillo**', align='left', size='xs', radius='xs', key="player_buttons", multiple=True)
              
                  # Utiliza sac.buttons para generar botones con cada número de jugador seleccionado
                  selected_player_numbers = [x for x in st.session_state.player_numbers_list if str(x) in campo]
