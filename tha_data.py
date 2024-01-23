@@ -69,29 +69,25 @@ def handle_action(team_name, rival_team, campo, phasegame, start, def_type, play
 #Info general:
 col1, col2 = st.columns(2)
 
-# Verifica si ya se ingresaron los nombres del equipo y del rival
-if 'team_name_value' not in st.session_state:
-    st.session_state.team_name_value = None
-if 'rival_team_value' not in st.session_state:
-    st.session_state.rival_team_value = None
+# Variable de estado para controlar la visibilidad de los campos de entrada
+if 'show_configuration' not in st.session_state:
+    st.session_state.show_configuration = True
+
+# Botón de switch para mostrar/ocultar la configuración
+st.session_state.show_configuration = st.checkbox("Mostrar Configuración", value=st.session_state.show_configuration)
 
 with col1:
-         # Si no se ha ingresado el nombre del equipo, muestra el campo de entrada
-    if st.session_state.team_name_value is None:
-        st.session_state.team_name_value = st.text_input('Equipo')
+         if st.session_state.show_configuration:
+        team_name_value = st.text_input('Equipo')
     else:
-        st.write(f"Equipo: {st.session_state.team_name_value}")
+        team_name_value = st.session_state.team_name_value
+    st.session_state.team_name_value = team_name_value
 with col2:
-         # Si no se ha ingresado el nombre del rival, muestra el campo de entrada
-    if st.session_state.rival_team_value is None:
-        st.session_state.rival_team_value = st.text_input('Rival')
+         if st.session_state.show_configuration:
+        rival_team_value = st.text_input('Rival')
     else:
-        st.write(f"Rival: {st.session_state.rival_team_value}")
-
-# Botón para mostrar/ocultar la configuración
-if st.button('Mostrar Configuración'):
-    st.session_state.team_name_value = None
-    st.session_state.rival_team_value = None
+        rival_team_value = st.session_state.rival_team_value
+    st.session_state.rival_team_value = rival_team_value
 
 #App Data
 col1, col2, col3 = st.columns(3)
