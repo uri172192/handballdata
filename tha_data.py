@@ -67,17 +67,12 @@ def handle_action(team_name, rival_team, campo, phasegame, start, def_type, play
     return df_copy
 
 #Info general:
+col1, col2 = st.columns(2)
 
-st.session_state.teamnames = sac.switch(label="Activar/Desactivar Nom", value=True)
-        
-# Utiliza la variable de estado del interruptor para activar o desactivar player_numbers_buttons2
-if st.session_state.teamnames:
+with col1:
          team_name = st.text_input('Equipo')
+with col2:
          rival_team = st.text_input('Rival')
-                     
-else:
-         team_name = None
-         rival_team = None
 
 #App Data
 col1, col2, col3 = st.columns(3)
