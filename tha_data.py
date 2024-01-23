@@ -76,14 +76,14 @@ with col2:
 
 st.session_state.teamnames = sac.switch(label="Activar/Desactivar Nom", value=True)
         
-                 # Utiliza la variable de estado del interruptor para activar o desactivar player_numbers_buttons2
-                 if st.session_state.teamnames:
-                     team_name = st.text_input('Equipo')
-                     rival_team = st.text_input('Rival')
+# Utiliza la variable de estado del interruptor para activar o desactivar player_numbers_buttons2
+if st.session_state.teamnames:
+         team_name = st.text_input('Equipo')
+         rival_team = st.text_input('Rival')
                      
-                 else:
-                     team_name = None
-                     rival_team = None
+else:
+         team_name = None
+         rival_team = None
 
 #App Data
 col1, col2, col3 = st.columns(3)
