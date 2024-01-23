@@ -69,25 +69,21 @@ def handle_action(team_name, rival_team, campo, phasegame, start, def_type, play
 #Info general:
 col1, col2 = st.columns(2)
 
-# Variable de estado para controlar la visibilidad de los campos de entrada
-if 'show_configuration' not in st.session_state:
-    st.session_state.show_configuration = True
-
-# Botón de switch para mostrar/ocultar la configuración
-st.session_state.show_configuration = st.checkbox("Mostrar Configuración", value=st.session_state.show_configuration)
-
 with col1:
-         if st.session_state.show_configuration:
-             team_name = st.text_input('Equipo')
-         else:
-             team_name = st.session_state.team_name_value
-         st.session_state.team_name = team_name
+         team_name = st.text_input('Equipo')
 with col2:
-         if st.session_state.show_configuration:
-             rival_team = st.text_input('Rival')
-         else:
-             rival_team = st.session_state.rival_team
-         st.session_state.rival_team = rival_team
+         rival_team = st.text_input('Rival')
+
+st.session_state.teamnames = sac.switch(label="Activar/Desactivar Nom", value=True)
+        
+                 # Utiliza la variable de estado del interruptor para activar o desactivar player_numbers_buttons2
+                 if st.session_state.teamnames:
+                     team_name = st.text_input('Equipo')
+                     rival_team = st.text_input('Rival')
+                     
+                 else:
+                     team_name = None
+                     rival_team = None
 
 #App Data
 col1, col2, col3 = st.columns(3)
