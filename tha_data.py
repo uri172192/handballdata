@@ -80,7 +80,7 @@ with col1:
          if st.session_state.show_configuration:
              team_name = st.text_input('Equipo')
     else:
-             team_name = st.session_state.team_name_value
+         team_name = st.session_state.team_name_value
     st.session_state.team_name = team_name
 with col2:
          if st.session_state.show_configuration:
