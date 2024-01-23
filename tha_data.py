@@ -67,12 +67,6 @@ def handle_action(team_name, rival_team, campo, phasegame, start, def_type, play
     return df_copy
 
 #Info general:
-col1, col2 = st.columns(2)
-
-with col1:
-         team_name = st.text_input('Equipo')
-with col2:
-         rival_team = st.text_input('Rival')
 
 st.session_state.teamnames = sac.switch(label="Activar/Desactivar Nom", value=True)
         
