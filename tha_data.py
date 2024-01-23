@@ -172,7 +172,7 @@ with col3:
                                sac.SegmentedItem(label='2-1'),
                                sac.SegmentedItem(label='9m Izq'),
                                sac.SegmentedItem(label='9m Centro'),
-                               sac.SegmentedItem(label='9m Der'),
+                               sac.SegmentedItem(label='9m Dereha'),
                                sac.SegmentedItem(label='-   Medio Campo   -'),
                                sac.SegmentedItem(label='-   Propio Campo   -')
                                ],
