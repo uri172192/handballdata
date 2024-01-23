@@ -79,15 +79,15 @@ st.session_state.show_configuration = st.checkbox("Mostrar Configuración", valu
 with col1:
          if st.session_state.show_configuration:
              team_name = st.text_input('Equipo')
-    else:
-         team_name = st.session_state.team_name_value
-    st.session_state.team_name = team_name
+         else:
+             team_name = st.session_state.team_name_value
+         st.session_state.team_name = team_name
 with col2:
          if st.session_state.show_configuration:
              rival_team = st.text_input('Rival')
-    else:
-        rival_team = st.session_state.rival_team
-    st.session_state.rival_team = rival_team
+         else:
+             rival_team = st.session_state.rival_team
+         st.session_state.rival_team = rival_team
 
 #App Data
 col1, col2, col3 = st.columns(3)
