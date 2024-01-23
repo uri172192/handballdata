@@ -205,7 +205,7 @@ with col3:
            '2-1': '6m 2-1',
            '9m Izq': '9mIzquierda',
            '9m Centro': '9mCentro',
-           '9m Derecha': '9mDerecha',
+           '9m Der': '9mDerecha',
            '-   Medio Campo   -':'Medio Campo',
            '-   Propio Campo   -': 'Propio Campo'
          }
