@@ -87,8 +87,8 @@ with col1:
 with col2:
          if not session_state.hide_columns:
                   rival_team = st.text_input('Rival')
-                           if rival_team:
-                                    session_state.hide_columns = True
+                  if rival_team:
+                           session_state.hide_columns = True
 
 
 #App Data
