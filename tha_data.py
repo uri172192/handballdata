@@ -71,8 +71,14 @@ col1, col2 = st.columns(2)
 
 with col1:
          team_name = st.text_input('Equipo')
+         if team_name:
+                  st.empty()  # Oculta la columna cuando se ha insertado el nombre del equipo
+
 with col2:
          rival_team = st.text_input('Rival')
+         if rival_team:
+                  st.empty()  # Oculta la columna cuando se ha insertado el nombre del equipo rival
+
 
 #App Data
 col1, col2, col3 = st.columns(3)
