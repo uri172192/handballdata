@@ -66,18 +66,29 @@ def handle_action(team_name, rival_team, campo, phasegame, start, def_type, play
     
     return df_copy
 
+
+# Función para obtener o crear el estado de la sesión
+def get_session_state():
+    session_state = st.session_state
+    if 'hide_columns' not in session_state:
+        session_state.hide_columns = False
+    return session_state
 #Info general:
 col1, col2 = st.columns(2)
+# Obtener el estado de la sesión
+session_state = get_session_state()
 
 with col1:
-         team_name = st.text_input('Equipo')
-         if team_name:
-                  st.markdown("")
+        if not session_state.hide_columns:
+        team_name = st.text_input('Equipo')
+        if team_name:
+            session_state.hide_columns = True
 
 with col2:
-         rival_team = st.text_input('Rival')
-         if rival_team:
-                  st.markdown("")
+         if not session_state.hide_columns:
+        rival_team = st.text_input('Rival')
+        if rival_team:
+            session_state.hide_columns = True
 
 
 #App Data
