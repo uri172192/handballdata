@@ -79,16 +79,16 @@ col1, col2 = st.columns(2)
 session_state = get_session_state()
 
 with col1:
-        if not session_state.hide_columns:
-        team_name = st.text_input('Equipo')
-        if team_name:
-            session_state.hide_columns = True
+         if not session_state.hide_columns:
+                  team_name = st.text_input('Equipo')
+                  if team_name:
+                           session_state.hide_columns = True
 
 with col2:
          if not session_state.hide_columns:
-        rival_team = st.text_input('Rival')
-        if rival_team:
-            session_state.hide_columns = True
+                  rival_team = st.text_input('Rival')
+                           if rival_team:
+                                    session_state.hide_columns = True
 
 
 #App Data
