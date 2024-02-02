@@ -27,6 +27,9 @@ def handle_action(player_name, position, rival_team, phasegame, start, action_ty
     # Obtener el DataFrame almacenado en la variable de estado
     df_copy = st.session_state.df.copy()
 
+    # Reemplazar "NA" con un valor adecuado (por ejemplo, None)
+    new_row = {key: "NA" if value == "NA" else value for key, value in new_row.items()}
+
     # Agregar una nueva fila al DataFrame
     df_copy = pd.concat([df_copy, pd.DataFrame([new_row])], ignore_index=True)
     
@@ -75,7 +78,7 @@ with col1:
                                      sac.SegmentedItem(label='Dobles'),
                                      sac.SegmentedItem(label='Ataque')],label='**Inicio Juego**', align='left', size='sm')
     
-    sub_action_type = sac.segmented(items=[sac.SegmentedItem(label='Nothing'),
+    sub_action_type = sac.segmented(items=[sac.SegmentedItem(label='NA'),
                                      sac.SegmentedItem(label='Xut'),
                                      sac.SegmentedItem(label='Asistencia'), 
                                      sac.SegmentedItem(label='Pérdida')],label='**Sub Action Type**', align='left', size='sm')
@@ -89,20 +92,20 @@ with col2:
                                      sac.SegmentedItem(label='Paralelo')],label='**Shoot Action Type**', align='left', size='sm')
 
     # Select distancia del lanzamiento
-    shoot_action_distance = sac.segmented(items=[sac.SegmentedItem(label='Nothing'),
+    shoot_action_distance = sac.segmented(items=[sac.SegmentedItem(label='NA'),
                                      sac.SegmentedItem(label='6m'), 
                                      sac.SegmentedItem(label='7m'),
                                      sac.SegmentedItem(label='9m')],label='**Shoot Action Distance**', align='left', size='sm')
      
     #Selecciona como se produce el lanzamiento
-    howshoot = sac.segmented(items=[sac.SegmentedItem(label='Nothing'),
+    howshoot = sac.segmented(items=[sac.SegmentedItem(label='NA'),
                                      sac.SegmentedItem(label='Salto'), 
                                      sac.SegmentedItem(label='Pie parado')],label='**Shoot Action Type**', align='left', size='sm')
 
 with col3:
 
     # Selectbox para seleccionar la opción de asistencia
-    ast_action_typeast = sac.segmented(items=[sac.SegmentedItem(label='Nothing'),
+    ast_action_typeast = sac.segmented(items=[sac.SegmentedItem(label='NA'),
                                      sac.SegmentedItem(label='PI'), 
                                      sac.SegmentedItem(label='CE'),
                                      sac.SegmentedItem(label='LD'),
