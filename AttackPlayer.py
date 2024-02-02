@@ -154,7 +154,6 @@ with col3:
             ast_action_typeast_value = ast_action_typeast
             result_value = result
             
-    
             # Diccionario de mapeo para los valores de Espacio Atacado/Defendido
             espacio_mapping = {
                '0-1': '6m 0-1',
