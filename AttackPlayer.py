@@ -103,7 +103,7 @@ with col2:
     #Selecciona como se produce el lanzamiento
     howshoot = sac.segmented(items=[sac.SegmentedItem(label='NA'),
                                      sac.SegmentedItem(label='Salto'), 
-                                     sac.SegmentedItem(label='Pie parado')],label='**Shoot Action Type**', align='left', size='sm')
+                                     sac.SegmentedItem(label='Pie parado')],label='**Howshoot**', align='left', size='sm')
 
 with col3:
 
