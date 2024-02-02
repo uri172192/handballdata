@@ -21,7 +21,7 @@ worksheet = sh.get_worksheet(0)  # Elige la hoja de trabajo (worksheet) adecuada
 st.set_page_config(page_title="HPAA", layout="wide")
 
 # Función para manejar las acciones y actualizar el DataFrame
-def handle_action(player_name, position, rival_team, phasegame, start, action_type, sub_action_type, space, shoot_action_type, shoot_action_distance, howshoot, ast_action_typeast, result, df):
+def handle_action(player_name, position, rival_team, phasegame, start, action_type, sub_action_type, space, shoot_action_type, shoot_action_distance, howshoot, ast_action_typeast, result):
     new_row = {'Player Name': player_name, 'Position': position, 'Rival Team Name': rival_team, 'Phase Game': phasegame, 'Inici': start,
                'Action Type': action_type, 'Sub Action Type': sub_action_type, 'Espai': space, 'Xut': shoot_action_type, 'Shoot Distance': shoot_action_distance, 'How Shoot': howshoot, 'Assist': ast_action_typeast, 'Result': result}
     df = df.append(new_row, ignore_index=True)
@@ -169,7 +169,6 @@ with col3:
     
             # Llamar a la función handle_action con los valores obtenidos
             action_data = handle_action(player_name, position_value, rival_team_value, phasegame_value, start_value, action_type_value, sub_action_type_value, space_value_mapped, shoot_action_type_value, shoot_action_distance_value, howshoot_value, ast_action_typeast_value, result_value)
-
         
             # Agrega nueva fila a la hoja de cálculo
             worksheet.append_row(action_data.iloc[-1].values.tolist())
