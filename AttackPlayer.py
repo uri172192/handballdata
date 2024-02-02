@@ -24,9 +24,16 @@ st.set_page_config(page_title="HPAA", layout="wide")
 def handle_action(player_name, position, rival_team, phasegame, start, action_type, sub_action_type, space, shoot_action_type, shoot_action_distance, howshoot, ast_action_typeast, result):
     new_row = {'Player Name': player_name, 'Position': position, 'Rival Team Name': rival_team, 'Phase Game': phasegame, 'Inici': start,
                'Action Type': action_type, 'Sub Action Type': sub_action_type, 'Espai': space, 'Xut': shoot_action_type, 'Shoot Distance': shoot_action_distance, 'How Shoot': howshoot, 'Assist': ast_action_typeast, 'Result': result}
-    df = df.append(new_row, ignore_index=True)
-    return df
+    # Obtener el DataFrame almacenado en la variable de estado
+    df_copy = st.session_state.df.copy()
 
+    # Agregar una nueva fila al DataFrame
+    df_copy = pd.concat([df_copy, pd.DataFrame([new_row])], ignore_index=True)
+    
+    # Actualizar la variable de estado con el DataFrame actualizado
+    st.session_state.df = df_copy
+    
+    return df_copy
 # Variable global para almacenar el estado del DataFrame
 if 'df' not in st.session_state:
     st.session_state.df = pd.DataFrame()
