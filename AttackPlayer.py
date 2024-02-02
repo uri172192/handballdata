@@ -34,6 +34,7 @@ def handle_action(player_name, position, rival_team, phasegame, start, action_ty
     st.session_state.df = df_copy
     
     return df_copy
+         
 # Variable global para almacenar el estado del DataFrame
 if 'df' not in st.session_state:
     st.session_state.df = pd.DataFrame()
@@ -175,8 +176,8 @@ with col3:
             space_value_mapped = espacio_mapping.get(space_value, space_value)
     
             # Llamar a la función handle_action con los valores obtenidos
-            action_data = handle_action(player_name, position_value, rival_team_value, phasegame_value, start_value, action_type_value, sub_action_type_value, space_value_mapped, shoot_action_type_value, shoot_action_distance_value, howshoot_value, ast_action_typeast_value, result_value)
+            action_data1 = handle_action(player_name, position_value, rival_team_value, phasegame_value, start_value, action_type_value, sub_action_type_value, space_value_mapped, shoot_action_type_value, shoot_action_distance_value, howshoot_value, ast_action_typeast_value, result_value)
         
             # Agrega nueva fila a la hoja de cálculo
-            worksheet.append_row(action_data.iloc[-1].values.tolist())
+            worksheet.append_row(action_data1.iloc[-1].values.tolist())
             st.success('Información agregada correctamente a Google Sheets')
