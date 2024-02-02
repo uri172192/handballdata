@@ -122,6 +122,12 @@ with col3:
                                    sac.SegmentedItem(label='-   Propio Campo   -')
                                    ],
                                    label='**Espacio Atacado/Defendido**', size='md', divider=False)
+ 
+    result = sac.segmented(items=[sac.SegmentedItem(label='Gol'),
+                                         sac.SegmentedItem(label='No Gol'), 
+                                         sac.SegmentedItem(label='Falta'),
+                                         sac.SegmentedItem(label='Fijacion'),
+                                         sac.SegmentedItem(label='7m')],label='**Resultado**', align='left', size='sm', color='green')
         
     # Botón para agregar información a Google Sheets
     if st.button('**REGISTRAR ACCIÓN**'):
@@ -157,13 +163,6 @@ with col3:
                '-   Medio Campo   -':'Medio Campo',
                '-   Propio Campo   -': 'Propio Campo'
              }
-    
-            # Botones para seleccionar la zona
-            result = sac.segmented(items=[sac.SegmentedItem(label='Gol'),
-                                         sac.SegmentedItem(label='No Gol'), 
-                                         sac.SegmentedItem(label='Falta'),
-                                         sac.SegmentedItem(label='Fijacion'),
-                                         sac.SegmentedItem(label='7m')],label='**Resultado**', align='left', size='sm', color='green')
     
             # Obtener el valor mapeado para el espacio seleccionado en la aplicación
             space_value_mapped = espacio_mapping.get(space_value, space_value)
