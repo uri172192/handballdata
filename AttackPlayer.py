@@ -79,7 +79,7 @@ with col1:
                                      sac.SegmentedItem(label='Mal pase'),
                                      sac.SegmentedItem(label='Pasos'),
                                      sac.SegmentedItem(label='Dobles'),
-                                     sac.SegmentedItem(label='Ataque')],label='**Inicio Juego**', align='left', size='sm')
+                                     sac.SegmentedItem(label='Ataque')],label='**Acción Juego**', align='left', size='sm')
     
     sub_action_type = sac.segmented(items=[sac.SegmentedItem(label='NA'),
                                      sac.SegmentedItem(label='Xut'),
