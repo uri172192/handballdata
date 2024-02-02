@@ -2,6 +2,9 @@ from cProfile import label
 import streamlit as st
 import pandas as pd
 from PIL import Image
+import gspread
+from oauth2client.service_account import ServiceAccountCredentials
+import time
 import streamlit_antd_components as sac
 
 # Configura las credenciales para acceder a la API de Google Sheets
