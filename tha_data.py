@@ -181,7 +181,7 @@ with col3:
                                label='**Espacio Atacado/Defendido**', size='md', color='green', divider=False)
     
     # Botón para agregar información a Google Sheets
-    if sac.ButtonsItem(label='**REGISTRAR ACCIÓN**',color='green'):
+    if st.button('**REGISTRAR ACCIÓN**'):
         # Obtener los valores de los campos
         team_name_value = team_name
         rival_team_value = rival_team
