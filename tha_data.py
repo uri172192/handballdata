@@ -181,7 +181,7 @@ with col3:
                                label='**Espacio Atacado/Defendido**', size='md', color='green', divider=False)
     
     # Botón para agregar información a Google Sheets
-    if st.button('**REGISTRAR ACCIÓN**, key='registrar_accion_button', bg_color='blue'):
+    if st.button('**REGISTRAR ACCIÓN**', key='registrar_accion_button', bg_color='blue'):
         # Obtener los valores de los campos
         team_name_value = team_name
         rival_team_value = rival_team
