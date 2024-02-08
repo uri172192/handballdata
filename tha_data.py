@@ -82,7 +82,7 @@ col1, col2, col3 = st.columns(3)
  
 with col1:
     #Fase Joc
-    phasegame = sac.segmented(items=[sac.SegmentedItem(label='Ataque'),sac.SegmentedItem(label='Defensa')],label='**Fase Juego**', align='left', size='sm')
+    phasegame = sac.segmented(items=[sac.SegmentedItem(label='Ataque'),sac.SegmentedItem(label='Defensa')],label='**Fase Juego**', align='left', size='sm', color='cyan')
 
     #Inici:
     start = sac.segmented(items=
@@ -94,7 +94,7 @@ with col1:
                                sac.SegmentedItem(label='Contraataque'),
                                sac.SegmentedItem(label='Superioridad'),
                                sac.SegmentedItem(label='Inferioridad')],
-                               label='**Situación Juego**', align='left', size='sm', divider=False)
+                               label='**Situación Juego**', align='left', size='sm', color='cyan', divider=False)
     # Desglosar tipos de acción y zonas en botones
     def_type = sac.segmented(items=
                               [sac.SegmentedItem(label='6:0'),
@@ -105,7 +105,7 @@ with col1:
                                sac.SegmentedItem(label='5:0'),
                                sac.SegmentedItem(label='4:0'),
                                sac.SegmentedItem(label='Individual')],
-                               label='**Tipo Defensa**', align='left', size='sm', color='green', divider=False)
+                               label='**Tipo Defensa**', align='left', size='sm', color='cyan', divider=False)
 with col2:
          
          if "page" not in st.session_state or st.session_state.page != "player_buttons":
@@ -150,7 +150,7 @@ with col2:
                                [sac.SegmentedItem(label='NA'),
                                 sac.SegmentedItem(label='Asistencia'),
                                 sac.SegmentedItem(label='Desmarque sin balón')],
-                                label='**Sub Acción**', align='left', size='sm', divider=False)
+                                label='**Sub Acción**', align='left', size='sm', color='lime', divider=False)
                  else:
                      player_numbers_buttons2 = None
                      sub_action_type1 = None
@@ -178,7 +178,7 @@ with col3:
                                sac.SegmentedItem(label='-   Medio Campo   -'),
                                sac.SegmentedItem(label='-   Propio Campo   -')
                                ],
-                               label='**Espacio Atacado/Defendido**', size='md', divider=False)
+                               label='**Espacio Atacado/Defendido**', size='md', color='green', divider=False)
     
     # Botón para agregar información a Google Sheets
     if st.button('**REGISTRAR ACCIÓN**'):
