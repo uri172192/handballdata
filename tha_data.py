@@ -26,20 +26,24 @@ if st.session_state.page == "home":
     st.title('**HANDBALL TEAM ANALYSIS**')
     st.write("Configura los números de los jugadores:")
 
+# Inicializa la variable de estado show_player_input si no existe
 if 'show_player_input' not in st.session_state:
     st.session_state.show_player_input = True
 
+# Antes de la creación del botón "Crear botones de jugadores"
 if 'show_create_button' not in st.session_state:
     st.session_state.show_create_button = True
          
+# Crea llista num jugadors, en lugar de st.text_input, usa st.text_area para ingresar múltiples números separados por comas
 if st.session_state.show_player_input:
     player_numbers = st.text_area("Introduce los números de los jugadores separados por comas:", value='1,2,3')
 
+# Crear botons
 if st.session_state.show_create_button and st.button("Crear botones de jugadores"):
     st.session_state.player_numbers_list = [int(x.strip()) for x in player_numbers.split(",") if x.strip().isnumeric()]
     st.session_state.page = "player_buttons"
-    st.session_state.show_player_input = False
-    st.session_state.show_create_button = False
+    st.session_state.show_player_input = False  # Oculta la sección de entrada de números de jugadores
+    st.session_state.show_create_button = False  # Oculta el botón "Crear botones de jugadores"
     
 # Variable global para almacenar el estado del DataFrame
 if 'df' not in st.session_state:
@@ -70,6 +74,7 @@ with col1:
 
 with col2:
          rival_team = st.text_input('Rival')
+
 
 
 #App Data
@@ -103,20 +108,20 @@ with col1:
                                label='**Tipo Defensa**', align='left', size='sm', color='cyan', divider=False)
 with col2:
          
-             if "page" not in st.session_state or st.session_state.page != "player_buttons":
-                 col2.write('')
-             else:
+         if "page" not in st.session_state or st.session_state.page != "player_buttons":
+                 col2.write('')  # Clear the previous input
+         else:
+                 #Utiliza sac.chip para generar botones con cada número de jugador
                  campo = sac.chip([
                      sac.ChipItem(label=str(player_num)) for player_num in st.session_state.player_numbers_list
                  ], label='**Banquillo**', align='left', size='xs', radius='xs', key="player_buttons", multiple=True)
-                 
-                 selected_player_numbers = filter(lambda x: str(x) in campo, st.session_state.player_numbers_list)
-                 player_numbers_buttons = sac.buttons([
-                     sac.ButtonsItem(label=str(player_num)) for player_num in selected_player_numbers
-                 ], label='**Pista**', align='left', size='xs', radius='xs')
-                 
+             
+                 # Utiliza sac.buttons para generar botones con cada número de jugador seleccionado
+                 selected_player_numbers = [x for x in st.session_state.player_numbers_list if str(x) in campo]
+                 player_numbers_buttons = sac.buttons([sac.ButtonsItem(label=str(player_num)) for player_num in selected_player_numbers],
+                                             label='**Pista**', align='left', size='xs', radius='xs')
+                 # Obtiene el número seleccionado del botón
                  player = player_numbers_buttons
-
 
                  action_type = sac.segmented(items=
                               [sac.SegmentedItem(label='Gol'),
