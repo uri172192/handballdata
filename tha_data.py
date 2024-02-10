@@ -37,8 +37,7 @@ if st.session_state.page == "home":
     if st.button("Crear botones de jugadores"):
         st.session_state.player_numbers = set(int(x.strip()) for x in player_numbers_input.split(",") if x.strip().isnumeric())
         st.session_state.page = "player_buttons"
-# Página de botones de jugadores
-elif st.session_state.page == "player_buttons":
+
     
 # Variable global para almacenar el estado del DataFrame
 if 'df' not in st.session_state:
