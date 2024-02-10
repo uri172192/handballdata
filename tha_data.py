@@ -19,31 +19,26 @@ worksheet = sh.get_worksheet(0)  # Elige la hoja de trabajo (worksheet) adecuada
 
 st.set_page_config(page_title="HTA", page_icon="favicon-32x32.png", layout="wide")
 
-if "page" not in st.session_state:
+# Inicializar el estado de la sesión
+if 'page' not in st.session_state:
     st.session_state.page = "home"
 
+# Inicializar números de jugadores como un conjunto
+if 'player_numbers' not in st.session_state:
+    st.session_state.player_numbers = set()
+
+# Página de inicio
 if st.session_state.page == "home":
     st.title('**HANDBALL TEAM ANALYSIS**')
     st.write("Configura los números de los jugadores:")
-
-# Inicializa la variable de estado show_player_input si no existe
-if 'show_player_input' not in st.session_state:
-    st.session_state.show_player_input = True
-
-# Antes de la creación del botón "Crear botones de jugadores"
-if 'show_create_button' not in st.session_state:
-    st.session_state.show_create_button = True
-         
-# Crea llista num jugadors, en lugar de st.text_input, usa st.text_area para ingresar múltiples números separados por comas
-if st.session_state.show_player_input:
-    player_numbers = st.text_area("Introduce los números de los jugadores separados por comas:", value='1,2,3')
-
-# Crear botons
-if st.session_state.show_create_button and st.button("Crear botones de jugadores"):
-    st.session_state.player_numbers_list = [int(x.strip()) for x in player_numbers.split(",") if x.strip().isnumeric()]
-    st.session_state.page = "player_buttons"
-    st.session_state.show_player_input = False  # Oculta la sección de entrada de números de jugadores
-    st.session_state.show_create_button = False  # Oculta el botón "Crear botones de jugadores"
+    # Usa st.text_area para ingresar múltiples números separados por comas
+    player_numbers_input = st.text_area("Introduce los números de los jugadores separados por comas:", value='1,2,3')
+    # Si se hace clic en el botón, actualiza la lista de números de jugadores
+    if st.button("Crear botones de jugadores"):
+        st.session_state.player_numbers = set(int(x.strip()) for x in player_numbers_input.split(",") if x.strip().isnumeric())
+        st.session_state.page = "player_buttons"
+# Página de botones de jugadores
+elif st.session_state.page == "player_buttons":
     
 # Variable global para almacenar el estado del DataFrame
 if 'df' not in st.session_state:
@@ -106,57 +101,50 @@ with col1:
                                sac.SegmentedItem(label='4:0'),
                                sac.SegmentedItem(label='Individual')],
                                label='**Tipo Defensa**', align='left', size='sm', color='cyan', divider=False)
+
 with col2:
-         
-         if "page" not in st.session_state or st.session_state.page != "player_buttons":
-                 col2.write('')  # Clear the previous input
-         else:
-                 #Utiliza sac.chip para generar botones con cada número de jugador
-                 campo = sac.chip([
-                     sac.ChipItem(label=str(player_num)) for player_num in st.session_state.player_numbers_list
-                 ], label='**Banquillo**', align='left', size='xs', radius='xs', key="player_buttons", multiple=True)
-             
-                 # Utiliza sac.buttons para generar botones con cada número de jugador seleccionado
-                 selected_player_numbers = [x for x in st.session_state.player_numbers_list if str(x) in campo]
-                 player_numbers_buttons = sac.buttons([sac.ButtonsItem(label=str(player_num)) for player_num in selected_player_numbers],
+        campo = sac.chip([
+            sac.ChipItem(label=str(player_num)) for player_num in st.session_state.player_numbers
+        ], label='**Banquillo**', align='left', size='xs', radius='xs', key="player_buttons", multiple=True)
+        selected_player_numbers = [x for x in st.session_state.player_numbers if str(x) in campo]
+        player_numbers_buttons = sac.buttons([sac.ButtonsItem(label=str(player_num)) for player_num in selected_player_numbers],
                                              label='**Pista**', align='left', size='xs', radius='xs')
-                 # Obtiene el número seleccionado del botón
-                 player = player_numbers_buttons
+        player = player_numbers_buttons
 
-                 action_type = sac.segmented(items=
-                              [sac.SegmentedItem(label='Gol'),
-                               sac.SegmentedItem(label='Falta'),
-                               sac.SegmentedItem(label='Parada'),
-                               sac.SegmentedItem(label='Palo/Fuera'),
-                               sac.SegmentedItem(label='Pasos'),
-                               sac.SegmentedItem(label='Dobles'),
-                               sac.SegmentedItem(label='Ataque'),
-                               sac.SegmentedItem(label='Area'),
-                               sac.SegmentedItem(label='Recuperación'),
-                               sac.SegmentedItem(label='Mal Pase'),
-                               sac.SegmentedItem(label='Mala Recepción'),
-                               sac.SegmentedItem(label='2 min'),
-                               sac.SegmentedItem(label='Penalti'),
-                               sac.SegmentedItem(label='Pasivo')],
-                               label='**Acción**', align='left', size='sm', divider=False)
+        action_type = sac.segmented(items=[
+            sac.SegmentedItem(label='Gol'),
+            sac.SegmentedItem(label='Falta'),
+            sac.SegmentedItem(label='Parada'),
+            sac.SegmentedItem(label='Palo/Fuera'),
+            sac.SegmentedItem(label='Pasos'),
+            sac.SegmentedItem(label='Dobles'),
+            sac.SegmentedItem(label='Ataque'),
+            sac.SegmentedItem(label='Area'),
+            sac.SegmentedItem(label='Recuperación'),
+            sac.SegmentedItem(label='Mal Pase'),
+            sac.SegmentedItem(label='Mala Recepción'),
+            sac.SegmentedItem(label='2 min'),
+            sac.SegmentedItem(label='Penalti'),
+            sac.SegmentedItem(label='Pasivo')
+        ], label='**Acción**', align='left', size='sm', divider=False)
 
-                 st.session_state.player_buttons_switch = sac.switch(label="Activar/Desactivar Feeder", value=True)
-        
-                 # Utiliza la variable de estado del interruptor para activar o desactivar player_numbers_buttons2
-                 if st.session_state.player_buttons_switch:
-                     player_numbers_buttons2 = sac.buttons([sac.ButtonsItem(label=str(player_num)) for player_num in selected_player_numbers],
-                                                          label='**Feeder**', align='left', size='xs', radius='xs')
-                     sub_action_type1 = sac.segmented(items=
-                               [sac.SegmentedItem(label='NA'),
-                                sac.SegmentedItem(label='Asistencia'),
-                                sac.SegmentedItem(label='Desmarque sin balón')],
-                                label='**Sub Acción**', align='left', size='sm', color='lime', divider=False)
-                 else:
-                     player_numbers_buttons2 = None
-                     sub_action_type1 = None
+        st.session_state.player_buttons_switch = sac.switch(label="Activar/Desactivar Feeder", value=True)
 
-                 player2 = player_numbers_buttons2
-                 sub_action_type = sub_action_type1
+        if st.session_state.player_buttons_switch:
+            player_numbers_buttons2 = sac.buttons([sac.ButtonsItem(label=str(player_num)) for player_num in selected_player_numbers],
+                                                  label='**Feeder**', align='left', size='xs', radius='xs')
+            sub_action_type1 = sac.segmented(items=[
+                sac.SegmentedItem(label='NA'),
+                sac.SegmentedItem(label='Asistencia'),
+                sac.SegmentedItem(label='Desmarque sin balón')
+            ], label='**Sub Acción**', align='left', size='sm', color='lime', divider=False)
+        else:
+            player_numbers_buttons2 = None
+            sub_action_type1 = None
+
+        player2 = player_numbers_buttons2
+        sub_action_type = sub_action_type1
+
 
     
 with col3:
