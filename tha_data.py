@@ -127,11 +127,11 @@ with col2:
             sac.SegmentedItem(label='Pasivo')
         ], label='**Acción**', align='left', size='sm', divider=False)
 
-        st.session_state.player_buttons_switch = sac.switch(label="Activar/Desactivar Feeder", value=True)
+        st.session_state.player_buttons_switch = sac.switch(label="Activar/Desactivar Feeder", off_color='grey', on_color='lime', value=True)
 
         if st.session_state.player_buttons_switch:
             player_numbers_buttons2 = sac.buttons([sac.ButtonsItem(label=str(player_num)) for player_num in selected_player_numbers],
-                                                  label='**Feeder**', align='left', size='xs', radius='xs')
+                                                  label='**Feeder**', align='left', size='xs', radius='xs', color='lime')
             sub_action_type1 = sac.segmented(items=[
                 sac.SegmentedItem(label='NA'),
                 sac.SegmentedItem(label='Asistencia'),
