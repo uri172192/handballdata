@@ -96,6 +96,7 @@ with col1:
                                sac.SegmentedItem(label='3:3'),
                                sac.SegmentedItem(label='3:2:1'),
                                sac.SegmentedItem(label='4:2'),
+                               sac.SegmentedItem(label='4:1:1'),
                                sac.SegmentedItem(label='5:0'),
                                sac.SegmentedItem(label='4:0'),
                                sac.SegmentedItem(label='Individual')],
