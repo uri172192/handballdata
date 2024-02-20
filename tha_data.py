@@ -36,6 +36,7 @@ if st.session_state.page == "home":
     # Si se hace clic en el botón, actualiza la lista de números de jugadores
     if st.button("Crear botones de jugadores"):
         player_numbers = sorted(int(x.strip()) for x in player_numbers_input.split(",") if x.strip().isnumeric())
+        player_numbers.sort()  # Ordenar los números de jugador
         st.session_state.player_numbers = set(int(x.strip()) for x in player_numbers_input.split(",") if x.strip().isnumeric())
         st.session_state.page = "player_buttons"
 
