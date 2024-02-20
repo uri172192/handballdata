@@ -23,9 +23,9 @@ st.set_page_config(page_title="HTA", page_icon="favicon-32x32.png", layout="wide
 if 'page' not in st.session_state:
     st.session_state.page = "home"
 
-# Inicializar números de jugadores como un conjunto
+# Inicializar números de jugadores como una lista
 if 'player_numbers' not in st.session_state:
-    st.session_state.player_numbers = set()
+    st.session_state.player_numbers = set[]
 
 # Página de inicio
 if st.session_state.page == "home":
@@ -36,7 +36,6 @@ if st.session_state.page == "home":
     # Si se hace clic en el botón, actualiza la lista de números de jugadores
     if st.button("Crear botones de jugadores"):
         player_numbers = sorted(int(x.strip()) for x in player_numbers_input.split(",") if x.strip().isnumeric())
-        player_numbers.sort()  # Ordenar los números de jugador
         st.session_state.player_numbers = set(int(x.strip()) for x in player_numbers_input.split(",") if x.strip().isnumeric())
         st.session_state.page = "player_buttons"
 
