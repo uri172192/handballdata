@@ -25,7 +25,7 @@ if 'page' not in st.session_state:
 
 # Inicializar números de jugadores como una lista
 if 'player_numbers' not in st.session_state:
-    st.session_state.player_numbers = set[]
+    st.session_state.player_numbers = []
 
 # Página de inicio
 if st.session_state.page == "home":
