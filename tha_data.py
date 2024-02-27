@@ -107,7 +107,8 @@ with col2:
         campo = sac.chip([
             sac.ChipItem(label=str(player_num)) for player_num in st.session_state.player_numbers
         ], label='**Banquillo**', align='left', size='xs', radius='xs', key="player_buttons", multiple=True)
-        player_numbers_str = [str(player_num) for player_num in sorted_player_numbers]
+        selected_player_numbers = [x for x in st.session_state.player_numbers if str(x) in campo]
+        player_numbers_str = [str(player_num) for player_num in selected_player_numbers]
         player_numbers_buttons = sac.buttons([sac.ButtonsItem(label=player_num_str) for player_num_str in player_numbers_str],
                                      label='**Pista**', align='left', size='xs', radius='xs')
         player = player_numbers_buttons
