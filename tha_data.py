@@ -135,8 +135,7 @@ with col2:
         st.session_state.player_buttons_switch = sac.switch(label="Activar/Desactivar Feeder", off_color='grey', on_color='lime', value=True)
 
         if st.session_state.player_buttons_switch:
-            sorted_player_numbers_buttons2 = sorted(player_numbers_str)  # Ordenar los botones
-            player_numbers_buttons2 = sac.buttons([sac.ButtonsItem(label=str(player_num)) for player_num in sorted_player_numbers_buttons2],
+            player_numbers_buttons2 = sac.buttons([sac.ButtonsItem(label=str(player_num)) for player_num in selected_player_numbers],
                                                   label='**Feeder**', align='left', size='xs', radius='xs', color='lime')   
             sub_action_type1 = sac.segmented(items=[
                 sac.SegmentedItem(label='NA'),
