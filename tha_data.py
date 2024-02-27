@@ -47,7 +47,6 @@ if 'df' not in st.session_state:
 
 # Función para manejar las acciones y actualizar el DataFrame
 def handle_action(team_name, rival_team, campo, phasegame, start, def_type, player, action_type, player2, sub_action_type, space):
-    sorted_selected_player_numbers = sorted([int(x) for x in campo.split(",")])
     new_row = {'Team Name': team_name, 'Rival Team Name': rival_team, 'Lineup': ''.join(campo), 'Phase Game': phasegame, 'Inici': start,
                'Def Type': def_type, 'Player': player, 'Action Type': action_type, 'Feeder': player2, 'Sub Action': sub_action_type, 'Espai': space}
     
@@ -108,8 +107,6 @@ with col2:
         campo = sac.chip([
             sac.ChipItem(label=str(player_num)) for player_num in st.session_state.player_numbers
         ], label='**Banquillo**', align='left', size='xs', radius='xs', key="player_buttons", multiple=True)
-        selected_player_numbers = [x for x in st.session_state.player_numbers if str(x) in campo]
-        sorted_player_numbers = sorted(selected_player_numbers)
         player_numbers_str = [str(player_num) for player_num in sorted_player_numbers]
         player_numbers_buttons = sac.buttons([sac.ButtonsItem(label=player_num_str) for player_num_str in player_numbers_str],
                                      label='**Pista**', align='left', size='xs', radius='xs')
