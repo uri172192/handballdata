@@ -136,11 +136,14 @@ with col2:
         if st.session_state.player_buttons_switch:
             player_numbers_buttons2 = sac.buttons([sac.ButtonsItem(label=str(player_num)) for player_num in selected_player_numbers],
                                                   label='**Feeder**', align='left', size='xs', radius='xs', color='lime')
+            selected_player_numbers2 = [x for x in st.session_state.player_buttons_switch if str(x) in player_numbers_buttons2]
+            sorted_player_numbers2 = sorted(selected_player_numbers2)     
             sub_action_type1 = sac.segmented(items=[
                 sac.SegmentedItem(label='NA'),
                 sac.SegmentedItem(label='Asistencia'),
                 sac.SegmentedItem(label='Desmarque sin balón')
             ], label='**Sub Acción**', align='left', size='sm', color='lime', divider=False)
+                 
         else:
             player_numbers_buttons2 = None
             sub_action_type1 = None
