@@ -36,7 +36,7 @@ if st.session_state.page == "home":
     # Si se hace clic en el botón, actualiza la lista de números de jugadores
     if st.button("Crear botones de jugadores"):
         player_numbers = sorted(int(x.strip()) for x in player_numbers_input.split(",") if x.strip().isnumeric())
-        st.session_state.player_numbers = set(int(x.strip()) for x in player_numbers_input.split(",") if x.strip().isnumeric())
+        st.session_state.player_numbers = sorted(set(player_numbers))
         st.session_state.page = "player_buttons"
 
     
@@ -104,9 +104,7 @@ with col1:
                                label='**Tipo Defensa**', align='left', size='sm', color='cyan', divider=False)
 
 with col2:
-        campo = sac.chip([
-            sac.ChipItem(label=str(player_num)) for player_num in st.session_state.player_numbers
-        ], label='**Banquillo**', align='left', size='xs', radius='xs', key="player_buttons", multiple=True)
+        campo = sac.chip([sac.ChipItem(label=str(player_num)) for player_num in st.session_state.player_numbers], label='**Banquillo**', align='left', size='xs', radius='xs', key="player_buttons", multiple=True)
         selected_player_numbers = [x for x in st.session_state.player_numbers if str(x) in campo]
         player_numbers_str = [str(player_num) for player_num in selected_player_numbers]
         player_numbers_buttons = sac.buttons([sac.ButtonsItem(label=player_num_str) for player_num_str in player_numbers_str],
