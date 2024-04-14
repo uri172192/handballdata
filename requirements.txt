@@ -1,4 +1,5 @@
-streamlit
+streamlit==1.29
+click==8.0.3
 pandas
 requests
 transformers
