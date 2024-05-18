@@ -12,10 +12,44 @@ scope = ['https://spreadsheets.google.com/feeds',
 creds = ServiceAccountCredentials.from_json_keyfile_name('my-project-uri-409012-2928f7e18a5a.json', scope)
 client = gspread.authorize(creds)
 
+# Define a function to handle retrieving the worksheet with retries
+def get_worksheet_with_retry(spreadsheet_url):
+  """
+  Obtains the specified worksheet URL with exponential backoff in case of quota errors.
+
+  Args:
+      spreadsheet_url (str): URL of the Google Sheets spreadsheet.
+
+  Returns:
+      Worksheet: The retrieved worksheet object.
+  """
+  retries = 0
+  delay = 1  # Initial delay in seconds
+
+  while retries < 3:
+    try:
+      spreadsheet = client.open_by_url(spreadsheet_url)
+      return spreadsheet.get_worksheet(0)
+    except gspread.exceptions.APIError as e:
+      if e.response.status_code == 429:
+        print(f"Quota exceeded. Retrying in {delay} seconds...")
+        time.sleep(delay)
+        retries += 1
+        delay *= 2  # Double the delay for each retry
+      else:
+        raise e  # Re-raise other exceptions
+  
+  # Raise an exception if all retries fail
+  raise Exception("Failed to retrieve worksheet after retries")
+
 # Abre la hoja de cálculo usando el enlace público
 spreadsheet_url = "https://docs.google.com/spreadsheets/d/1LKgT9JOEjH96Zlv8B7rXOdRwDjvCZ_3zbYUp9VbDypI/edit?usp=sharing"
-sh = client.open_by_url(spreadsheet_url)
-worksheet = sh.get_worksheet(0)  # Elige la hoja de trabajo (worksheet) adecuada
+try:
+  sh = client.open_by_url(spreadsheet_url)
+  worksheet = sh.get_worksheet(0)  # Elige la hoja de trabajo (worksheet) adecuada
+except Exception as e:
+  st.error(f"Error abriendo spreadsheet: {e}")
+  exit() #Salir de la app si la apertura falla
 
 st.set_page_config(page_title="HTA", page_icon="favicon-32x32.png", layout="wide")
 
@@ -204,9 +238,12 @@ with col3:
         # Obtener el valor mapeado para el espacio seleccionado en la aplicación
         space_value_mapped = espacio_mapping.get(space_value, space_value)
 
+      try:
         # Llamar a la función handle_action con los valores obtenidos
         action_data = handle_action(team_name_value, rival_team_value, campo_value, phasegame_value, start_value, def_type_value, player_value, action_type_value, player2_value, sub_action_type_value, space_value_mapped)
     
         # Agrega nueva fila a la hoja de cálculo
         worksheet.append_row(action_data.iloc[-1].values.tolist())
         st.success('Información agregada correctamente a Google Sheets')
+      except Exception as e:
+        st.error(f"Error al agregar información: {e}")
