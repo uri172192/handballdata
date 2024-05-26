@@ -14,42 +14,32 @@ client = gspread.authorize(creds)
 
 # Define a function to handle retrieving the worksheet with retries
 def get_worksheet_with_retry(spreadsheet_url):
-  """
-  Obtains the specified worksheet URL with exponential backoff in case of quota errors.
+    retries = 0
+    delay = 1  # Initial delay in seconds
 
-  Args:
-      spreadsheet_url (str): URL of the Google Sheets spreadsheet.
+    while retries < 3:
+        try:
+            spreadsheet = client.open_by_url(spreadsheet_url)
+            return spreadsheet.get_worksheet(0)
+        except gspread.exceptions.APIError as e:
+            if e.response.status_code == 429:
+                print(f"Quota exceeded. Retrying in {delay} seconds...")
+                time.sleep(delay)
+                retries += 1
+                delay *= 2  # Double the delay for each retry
+            else:
+                raise e  # Re-raise other exceptions
 
-  Returns:
-      Worksheet: The retrieved worksheet object.
-  """
-  retries = 0
-  delay = 1  # Initial delay in seconds
-
-  while retries < 3:
-    try:
-      spreadsheet = client.open_by_url(spreadsheet_url)
-      return spreadsheet.get_worksheet(0)
-    except gspread.exceptions.APIError as e:
-      if e.response.status_code == 429:
-        print(f"Quota exceeded. Retrying in {delay} seconds...")
-        time.sleep(delay)
-        retries += 1
-        delay *= 2  # Double the delay for each retry
-      else:
-        raise e  # Re-raise other exceptions
-  
-  # Raise an exception if all retries fail
-  raise Exception("Failed to retrieve worksheet after retries")
+    # Raise an exception if all retries fail
+    raise Exception("Failed to retrieve worksheet after retries")
 
 # Abre la hoja de cálculo usando el enlace público
 spreadsheet_url = "https://docs.google.com/spreadsheets/d/1LKgT9JOEjH96Zlv8B7rXOdRwDjvCZ_3zbYUp9VbDypI/edit?usp=sharing"
 try:
-  sh = client.open_by_url(spreadsheet_url)
-  worksheet = sh.get_worksheet(0)  # Elige la hoja de trabajo (worksheet) adecuada
+    worksheet = get_worksheet_with_retry(spreadsheet_url)  # Usa la función con reintentos
 except Exception as e:
-  st.error(f"Error abriendo spreadsheet: {e}")
-  exit() #Salir de la app si la apertura falla
+    st.error(f"Error abriendo spreadsheet: {e}")
+    exit()  # Salir de la app si la apertura falla
 
 st.set_page_config(page_title="HTA", page_icon="favicon-32x32.png", layout="wide")
 
@@ -73,7 +63,6 @@ if st.session_state.page == "home":
         st.session_state.player_numbers = sorted(set(player_numbers))
         st.session_state.page = "player_buttons"
 
-    
 # Variable global para almacenar el estado del DataFrame
 if 'df' not in st.session_state:
     st.session_state.df = pd.DataFrame(columns=['Team Name', 'Rival Team Name', 'Lineup', 'Phase Game', 'Inici', 
@@ -238,5 +227,9 @@ with col3:
             # Llamar a la función handle_action con los valores obtenidos
             action_data = handle_action(team_name_value, rival_team_value, campo_value, phasegame_value, start_value, def_type_value, player_value, action_type_value, player2_value, sub_action_type_value, space_value_mapped)
             st.success("Acción registrada con éxito")
+
+            # Agregar la nueva fila a Google Sheets
+            worksheet.append_row([team_name_value, rival_team_value, campo_value, phasegame_value, start_value, def_type_value, player_value, action_type_value, player2_value, sub_action_type_value, space_value_mapped])
+            st.success("Datos enviados a tu Google Sheets")
         except Exception as e:
             st.error(f"Error al registrar la acción: {e}")
