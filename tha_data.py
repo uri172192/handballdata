@@ -223,12 +223,8 @@ with col3:
         space_value_mapped = espacio_mapping.get(space_value, space_value)
 
         try:
-            # Llamar a la función handle_action con los valores obtenidos
-            action_data = handle_action(team_name_value, rival_team_value, campo_value, phasegame_value, start_value, def_type_value, player_value, action_type_value, player2_value, sub_action_type_value, space_value_mapped)
-            st.success("Acción registrada con éxito")
-
             # Agregar la nueva fila a Google Sheets
             worksheet.append_row([team_name_value, rival_team_value, campo_value, phasegame_value, start_value, def_type_value, player_value, action_type_value, player2_value, sub_action_type_value, space_value_mapped])
-            st.success("Datos enviados a Google Sheets")
+            st.success("Datos registrados y enviados a Google Sheets con éxito.")
         except Exception as e:
             st.error(f"Error al registrar la acción: {e}")
