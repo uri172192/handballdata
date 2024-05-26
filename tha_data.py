@@ -76,12 +76,12 @@ if st.session_state.page == "home":
     
 # Variable global para almacenar el estado del DataFrame
 if 'df' not in st.session_state:
-    st.session_state.df = pd.DataFrame(columns=['Team Name', 'Rival Team Name', 'Lineup', 'Phase Game', 'Inici',
+    st.session_state.df = pd.DataFrame(columns=['Team Name', 'Rival Team Name', 'Lineup', 'Phase Game', 'Inici', 
                                                 'Def Type', 'Player', 'Action Type', 'Feeder', 'Sub Action', 'Espai'])
 
 # Función para manejar las acciones y actualizar el DataFrame
 def handle_action(team_name, rival_team, campo, phasegame, start, def_type, player, action_type, player2, sub_action_type, space):
-    new_row = {'Team Name': team_name, 'Rival Team Name': rival_team, 'Lineup': ''.join(campo), 'Phase Game': phasegame, 'Inici': start,
+    new_row = {'Team Name': team_name, 'Rival Team Name': rival_team, 'Lineup': campo, 'Phase Game': phasegame, 'Inici': start,
                'Def Type': def_type, 'Player': player, 'Action Type': action_type, 'Feeder': player2, 'Sub Action': sub_action_type, 'Espai': space}
     
     # Obtener el DataFrame almacenado en la variable de estado
@@ -95,114 +95,110 @@ def handle_action(team_name, rival_team, campo, phasegame, start, def_type, play
     
     return df_copy
 
-#Info general:
+# Info general:
 col1, col2 = st.columns(2)
 
 with col1:
-         team_name = st.text_input('Equipo')
+    team_name = st.text_input('Equipo')
 
 with col2:
-         rival_team = st.text_input('Rival')
+    rival_team = st.text_input('Rival')
 
-
-
-#App Data
+# App Data
 col1, col2, col3 = st.columns(3)
- 
-with col1:
-    #Fase Joc
-    phasegame = sac.segmented(items=[sac.SegmentedItem(label='Ataque'),sac.SegmentedItem(label='Defensa')],label='**Fase Juego**', align='left', size='sm', color='cyan')
 
-    #Inici:
-    start = sac.segmented(items=
-                              [sac.SegmentedItem(label='Posicional'),
-                               sac.SegmentedItem(label='Falta'),
-                               sac.SegmentedItem(label='2da Oleada'),
-                               sac.SegmentedItem(label='Repliegue'),
-                               sac.SegmentedItem(label='Contragol'),
-                               sac.SegmentedItem(label='Contraataque'),
-                               sac.SegmentedItem(label='Superioridad'),
-                               sac.SegmentedItem(label='Inferioridad')],
-                               label='**Situación Juego**', align='left', size='sm', color='cyan', divider=False)
+with col1:
+    # Fase Joc
+    phasegame = sac.segmented(items=[sac.SegmentedItem(label='Ataque'), sac.SegmentedItem(label='Defensa')], label='**Fase Juego**', align='left', size='sm', color='cyan')
+
+    # Inici:
+    start = sac.segmented(items=[
+                              sac.SegmentedItem(label='Posicional'),
+                              sac.SegmentedItem(label='Falta'),
+                              sac.SegmentedItem(label='2da Oleada'),
+                              sac.SegmentedItem(label='Repliegue'),
+                              sac.SegmentedItem(label='Contragol'),
+                              sac.SegmentedItem(label='Contraataque'),
+                              sac.SegmentedItem(label='Superioridad'),
+                              sac.SegmentedItem(label='Inferioridad')],
+                          label='**Situación Juego**', align='left', size='sm', color='cyan', divider=False)
+
     # Desglosar tipos de acción y zonas en botones
-    def_type = sac.segmented(items=
-                              [sac.SegmentedItem(label='6:0'),
-                               sac.SegmentedItem(label='5:1'),
-                               sac.SegmentedItem(label='3:3'),
-                               sac.SegmentedItem(label='3:2:1'),
-                               sac.SegmentedItem(label='4:2'),
-                               sac.SegmentedItem(label='4:1:1'),
-                               sac.SegmentedItem(label='5:0'),
-                               sac.SegmentedItem(label='4:0'),
-                               sac.SegmentedItem(label='Individual')],
-                               label='**Tipo Defensa**', align='left', size='sm', color='cyan', divider=False)
+    def_type = sac.segmented(items=[
+                              sac.SegmentedItem(label='6:0'),
+                              sac.SegmentedItem(label='5:1'),
+                              sac.SegmentedItem(label='3:3'),
+                              sac.SegmentedItem(label='3:2:1'),
+                              sac.SegmentedItem(label='4:2'),
+                              sac.SegmentedItem(label='4:1:1'),
+                              sac.SegmentedItem(label='5:0'),
+                              sac.SegmentedItem(label='4:0'),
+                              sac.SegmentedItem(label='Individual')],
+                          label='**Tipo Defensa**', align='left', size='sm', color='cyan', divider=False)
 
 with col2:
-        campo = sac.chip([sac.ChipItem(label=str(player_num)) for player_num in st.session_state.player_numbers], label='**Banquillo**', align='left', size='xs', radius='xs', key="player_buttons", multiple=True)
-        selected_player_numbers = [x for x in st.session_state.player_numbers if str(x) in campo]
-        player_numbers_str = [str(player_num) for player_num in selected_player_numbers]
-        player_numbers_buttons = sac.buttons([sac.ButtonsItem(label=player_num_str) for player_num_str in player_numbers_str],
-                                     label='**Pista**', align='left', size='xs', radius='xs')
-        player = player_numbers_buttons
+    campo = sac.chip([sac.ChipItem(label=str(player_num)) for player_num in st.session_state.get('player_numbers', [])], label='**Banquillo**', align='left', size='xs', radius='xs', key="player_buttons", multiple=True)
+    selected_player_numbers = [x for x in st.session_state.get('player_numbers', []) if str(x) in campo]
+    player_numbers_str = [str(player_num) for player_num in selected_player_numbers]
+    player_numbers_buttons = sac.buttons([sac.ButtonsItem(label=player_num_str) for player_num_str in player_numbers_str],
+                                         label='**Pista**', align='left', size='xs', radius='xs')
+    player = player_numbers_buttons
 
-        action_type = sac.segmented(items=[
-            sac.SegmentedItem(label='Gol'),
-            sac.SegmentedItem(label='Falta'),
-            sac.SegmentedItem(label='Parada'),
-            sac.SegmentedItem(label='Palo/Fuera'),
-            sac.SegmentedItem(label='Pasos'),
-            sac.SegmentedItem(label='Dobles'),
-            sac.SegmentedItem(label='Ataque'),
-            sac.SegmentedItem(label='Area'),
-            sac.SegmentedItem(label='Recuperación'),
-            sac.SegmentedItem(label='Mal Pase'),
-            sac.SegmentedItem(label='Mala Recepción'),
-            sac.SegmentedItem(label='2 min'),
-            sac.SegmentedItem(label='Penalti'),
-            sac.SegmentedItem(label='Pasivo')
-        ], label='**Acción**', align='left', size='sm', divider=False)
+    action_type = sac.segmented(items=[
+        sac.SegmentedItem(label='Gol'),
+        sac.SegmentedItem(label='Falta'),
+        sac.SegmentedItem(label='Parada'),
+        sac.SegmentedItem(label='Palo/Fuera'),
+        sac.SegmentedItem(label='Pasos'),
+        sac.SegmentedItem(label='Dobles'),
+        sac.SegmentedItem(label='Ataque'),
+        sac.SegmentedItem(label='Area'),
+        sac.SegmentedItem(label='Recuperación'),
+        sac.SegmentedItem(label='Mal Pase'),
+        sac.SegmentedItem(label='Mala Recepción'),
+        sac.SegmentedItem(label='2 min'),
+        sac.SegmentedItem(label='Penalti'),
+        sac.SegmentedItem(label='Pasivo')
+    ], label='**Acción**', align='left', size='sm', divider=False)
 
-        st.session_state.player_buttons_switch = sac.switch(label="Activar/Desactivar Feeder", off_color='grey', on_color='lime', value=True)
+    st.session_state.player_buttons_switch = sac.switch(label="Activar/Desactivar Feeder", off_color='grey', on_color='lime', value=True)
 
-        if st.session_state.player_buttons_switch:
-            player_numbers_buttons2 = sac.buttons([sac.ButtonsItem(label=str(player_num)) for player_num in selected_player_numbers],
-                                                  label='**Feeder**', align='left', size='xs', radius='xs', color='lime')   
-            sub_action_type1 = sac.segmented(items=[
-                sac.SegmentedItem(label='NA'),
-                sac.SegmentedItem(label='Asistencia'),
-                sac.SegmentedItem(label='Desmarque sin balón')
-            ], label='**Sub Acción**', align='left', size='sm', color='lime', divider=False)
-                 
-        else:
-            player_numbers_buttons2 = None
-            sub_action_type1 = None
+    if st.session_state.player_buttons_switch:
+        player_numbers_buttons2 = sac.buttons([sac.ButtonsItem(label=str(player_num)) for player_num in selected_player_numbers],
+                                              label='**Feeder**', align='left', size='xs', radius='xs', color='lime')   
+        sub_action_type1 = sac.segmented(items=[
+            sac.SegmentedItem(label='NA'),
+            sac.SegmentedItem(label='Asistencia'),
+            sac.SegmentedItem(label='Desmarque sin balón')
+        ], label='**Sub Acción**', align='left', size='sm', color='lime', divider=False)
+             
+    else:
+        player_numbers_buttons2 = None
+        sub_action_type1 = None
 
-        player2 = player_numbers_buttons2
-        sub_action_type = sub_action_type1
+    player2 = player_numbers_buttons2
+    sub_action_type = sub_action_type1
 
-
-    
 with col3:
     # Espais Atacats
-    space = sac.segmented(items=
-                              [sac.SegmentedItem(label='0-1'),
-                               sac.SegmentedItem(label='...', disabled=True),
-                               sac.SegmentedItem(label='7 metros'),
-                               sac.SegmentedItem(label='...', disabled=True),
-                               sac.SegmentedItem(label='1-0'),
-                               sac.SegmentedItem(label='1-2'),
-                               sac.SegmentedItem(label='2-3'),
-                               sac.SegmentedItem(label='3-3'),
-                               sac.SegmentedItem(label='3-2'),
-                               sac.SegmentedItem(label='2-1'),
-                               sac.SegmentedItem(label='9m Izq'),
-                               sac.SegmentedItem(label='9m Centro'),
-                               sac.SegmentedItem(label='9m Der'),
-                               sac.SegmentedItem(label='-   Medio Campo   -'),
-                               sac.SegmentedItem(label='-   Propio Campo   -')
-                               ],
-                               label='**Espacio Atacado/Defendido**', size='md', color='green', divider=False)
-    
+    space = sac.segmented(items=[
+                              sac.SegmentedItem(label='0-1'),
+                              sac.SegmentedItem(label='...', disabled=True),
+                              sac.SegmentedItem(label='7 metros'),
+                              sac.SegmentedItem(label='...', disabled=True),
+                              sac.SegmentedItem(label='1-0'),
+                              sac.SegmentedItem(label='1-2'),
+                              sac.SegmentedItem(label='2-3'),
+                              sac.SegmentedItem(label='3-3'),
+                              sac.SegmentedItem(label='3-2'),
+                              sac.SegmentedItem(label='2-1'),
+                              sac.SegmentedItem(label='9m Izq'),
+                              sac.SegmentedItem(label='9m Centro'),
+                              sac.SegmentedItem(label='9m Der'),
+                              sac.SegmentedItem(label='-   Medio Campo   -'),
+                              sac.SegmentedItem(label='-   Propio Campo   -')],
+                          label='**Espacio Atacado/Defendido**', size='md', color='green', divider=False)
+
     # Botón para agregar información a Google Sheets
     if st.button('**REGISTRAR ACCIÓN**'):
         # Obtener los valores de los campos
@@ -220,31 +216,27 @@ with col3:
 
         # Diccionario de mapeo para los valores de Espacio Atacado/Defendido
         espacio_mapping = {
-           '0-1': '6m 0-1',
-           '7 metros': '7m',
-           '1-0': '6m 1-0',
-           '1-2': '6m 1-2',
-           '2-3': '6m 2-3',
-           '3-3': '6m 3-3',
-           '3-2': '6m 3-2',
-           '2-1': '6m 2-1',
-           '9m Izq': '9mIzquierda',
-           '9m Centro': '9mCentro',
-           '9m Der': '9mDerecha',
-           '-   Medio Campo   -':'Medio Campo',
-           '-   Propio Campo   -': 'Propio Campo'
-         }
+            '0-1': '6m 0-1',
+            '7 metros': '7m',
+            '1-0': '6m 1-0',
+            '1-2': '6m 1-2',
+            '2-3': '6m 2-3',
+            '3-3': '6m 3-3',
+            '3-2': '6m 3-2',
+            '2-1': '6m 2-1',
+            '9m Izq': '9mIzquierda',
+            '9m Centro': '9mCentro',
+            '9m Der': '9mDerecha',
+            '-   Medio Campo   -': 'Medio Campo',
+            '-   Propio Campo   -': 'Propio Campo'
+        }
 
         # Obtener el valor mapeado para el espacio seleccionado en la aplicación
         space_value_mapped = espacio_mapping.get(space_value, space_value)
 
-    try:
-        # Llamar a la función handle_action con los valores obtenidos
-        action_data = handle_action(team_name_value, rival_team_value, campo_value, phasegame_value, start_value, def_type_value, player_value, action_type_value, player2_value, sub_action_type_value, space_value_mapped)
-    
-        # Agrega nueva fila a la hoja de cálculo
-        worksheet.append_row(action_data.iloc[-1].values.tolist())
-        st.success('Información agregada correctamente a Google Sheets')
-               
-    except Exception as e:
-        st.error(f"Error al agregar información: {e}")
+        try:
+            # Llamar a la función handle_action con los valores obtenidos
+            action_data = handle_action(team_name_value, rival_team_value, campo_value, phasegame_value, start_value, def_type_value, player_value, action_type_value, player2_value, sub_action_type_value, space_value_mapped)
+            st.success("Acción registrada con éxito")
+        except Exception as e:
+            st.error(f"Error al registrar la acción: {e}")
