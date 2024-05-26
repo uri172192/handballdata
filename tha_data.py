@@ -1,4 +1,3 @@
-from cProfile import label
 import streamlit as st
 import pandas as pd
 import gspread
@@ -12,7 +11,7 @@ scope = ['https://spreadsheets.google.com/feeds',
 creds = ServiceAccountCredentials.from_json_keyfile_name('my-project-uri-409012-2928f7e18a5a.json', scope)
 client = gspread.authorize(creds)
 
-# Define a function to handle retrieving the worksheet with retries
+# Define una función para manejar la obtención de la hoja de cálculo con reintentos
 def get_worksheet_with_retry(spreadsheet_url):
     retries = 0
     delay = 1  # Initial delay in seconds
@@ -171,22 +170,39 @@ with col2:
 with col3:
     # Espais Atacats
     space = sac.segmented(items=[
-                              sac.SegmentedItem(label='0-1'),
-                              sac.SegmentedItem(label='...', disabled=True),
-                              sac.SegmentedItem(label='7 metros'),
-                              sac.SegmentedItem(label='...', disabled=True),
-                              sac.SegmentedItem(label='1-0'),
-                              sac.SegmentedItem(label='1-2'),
-                              sac.SegmentedItem(label='2-3'),
-                              sac.SegmentedItem(label='3-3'),
-                              sac.SegmentedItem(label='3-2'),
-                              sac.SegmentedItem(label='2-1'),
-                              sac.SegmentedItem(label='9m Izq'),
-                              sac.SegmentedItem(label='9m Centro'),
-                              sac.SegmentedItem(label='9m Der'),
-                              sac.SegmentedItem(label='-   Medio Campo   -'),
-                              sac.SegmentedItem(label='-   Propio Campo   -')],
-                          label='**Espacio Atacado/Defendido**', size='md', color='green', divider=False)
+                          sac.SegmentedItem(label='0-1'),
+                          sac.SegmentedItem(label='...', disabled=True),
+                          sac.SegmentedItem(label='7 metros'),
+                          sac.SegmentedItem(label='...', disabled=True),
+                          sac.SegmentedItem(label='1-0'),
+                          sac.SegmentedItem(label='1-2'),
+                          sac.SegmentedItem(label='2-3'),
+                          sac.SegmentedItem(label='3-3'),
+                          sac.SegmentedItem(label='3-2'),
+                          sac.SegmentedItem(label='2-1'),
+                          sac.SegmentedItem(label='9m Izq'),
+                          sac.SegmentedItem(label='9m Centro'),
+                          sac.SegmentedItem(label='9m Der'),
+                          sac.SegmentedItem(label='-   Medio Campo   -'),
+                          sac.SegmentedItem(label='-   Propio Campo   -')],
+                      label='**Espacio Atacado/Defendido**', size='md', color='green', divider=False)
+
+    # Diccionario de mapeo para los valores de Espacio Atacado/Defendido
+    espacio_mapping = {
+        '0-1': '6m 0-1',
+        '7 metros': '7m',
+        '1-0': '6m 1-0',
+        '1-2': '6m 1-2',
+        '2-3': '6m 2-3',
+        '3-3': '6m 3-3',
+        '3-2': '6m 3-2',
+        '2-1': '6m 2-1',
+        '9m Izq': '9mIzquierda',
+        '9m Centro': '9mCentro',
+        '9m Der': '9mDerecha',
+        '-   Medio Campo   -': 'Medio Campo',
+        '-   Propio Campo   -': 'Propio Campo'
+    }
 
     # Botón para agregar información a Google Sheets
     if st.button('**REGISTRAR ACCIÓN**'):
@@ -203,29 +219,16 @@ with col3:
         sub_action_type_value = sub_action_type
         space_value = space
 
-        # Diccionario de mapeo para los valores de Espacio Atacado/Defendido
-        espacio_mapping = {
-            '0-1': '6m 0-1',
-            '7 metros': '7m',
-            '1-0': '6m 1-0',
-            '1-2': '6m 1-2',
-            '2-3': '6m 2-3',
-            '3-3': '6m 3-3',
-            '3-2': '6m 3-2',
-            '2-1': '6m 2-1',
-            '9m Izq': '9mIzquierda',
-            '9m Centro': '9mCentro',
-            '9m Der': '9mDerecha',
-            '-   Medio Campo   -': 'Medio Campo',
-            '-   Propio Campo   -': 'Propio Campo'
-        }
-
         # Obtener el valor mapeado para el espacio seleccionado en la aplicación
         space_value_mapped = espacio_mapping.get(space_value, space_value)
 
-        try:     
+        try:
+            # Llamar a la función handle_action con los valores obtenidos
+            action_data = handle_action(team_name_value, rival_team_value, campo_value, phasegame_value, start_value, def_type_value, player_value, action_type_value, player2_value, sub_action_type_value, space_value_mapped)
+            st.success("Acción registrada con éxito")
+
             # Agregar la nueva fila a Google Sheets
             worksheet.append_row([team_name_value, rival_team_value, campo_value, phasegame_value, start_value, def_type_value, player_value, action_type_value, player2_value, sub_action_type_value, space_value_mapped])
-            st.success("Datos registrados con éxito y enviados a tu Google Sheets")
+            st.success("Datos enviados a Google Sheets")
         except Exception as e:
             st.error(f"Error al registrar la acción: {e}")
